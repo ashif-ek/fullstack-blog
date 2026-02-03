@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import api from "../api";
 import Layout from "../components/Layout";
 import { useToast } from "../context/ToastContext";
@@ -155,6 +156,20 @@ function Profile() {
                         </button>
                     </div>
                 </form>
+                <div className="mt-12 pt-10 border-t border-gray-100">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h2 className="text-lg font-serif font-bold text-slate-900">Security Settings</h2>
+                            <p className="text-slate-500 font-sans text-xs mt-1">Update your password to keep your account secure.</p>
+                        </div>
+                        <Link 
+                            to="/change-password" 
+                            className="border-2 border-slate-100 hover:border-slate-900 text-slate-700 hover:text-slate-900 font-sans font-bold py-3 px-6 uppercase tracking-widest text-xs rounded-none transition duration-300"
+                        >
+                            Change Password
+                        </Link>
+                    </div>
+                </div>
             </div>
         </Layout>
     );
