@@ -15,6 +15,7 @@ const Home = lazy(() => import("./pages/Home"));
 const PostDetail = lazy(() => import("./pages/PostDetail"));
 const Profile = lazy(() => import("./pages/Profile"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const ChangePassword = lazy(() => import("./pages/ChangePassword"));
 
 function Logout() {
     Cookies.remove(ACCESS_TOKEN)
@@ -73,6 +74,16 @@ function App() {
         />
         <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
         <Route path="/logout" element={<PageWrapper><Logout /></PageWrapper>} />
+        <Route
+          path="/change-password"
+          element={
+            <PageWrapper>
+              <ProtectedRoute>
+                <ChangePassword />
+              </ProtectedRoute>
+            </PageWrapper>
+          }
+        />
         <Route path="/register" element={<PageWrapper><RegisterAndLogout /></PageWrapper>} />
         
         {/* Static Pages */}

@@ -75,6 +75,7 @@ function Navbar() {
                                     )}
                                     Profile
                                 </Link>
+                                <Link to="/change-password" className="text-slate-600 hover:text-blue-900 font-sans uppercase tracking-widest text-xs font-bold transition">Change Password</Link>
                                 <button onClick={handleLogout} className="text-slate-400 hover:text-red-700 font-sans uppercase tracking-widest text-xs font-bold transition">Log Out</button>
                             </>
                         ) : (
@@ -102,6 +103,7 @@ function Navbar() {
                                     <div className="flex flex-col">
                                          <span className="text-sm font-bold text-slate-900">Signed In</span>
                                          <Link to="/profile" className="text-xs text-blue-700 font-sans font-bold uppercase tracking-widest mt-1" onClick={() => setIsMenuOpen(false)}>Manage Profile</Link>
+                                         <Link to="/change-password" className="text-xs text-slate-500 hover:text-slate-800 font-sans font-bold uppercase tracking-widest mt-1" onClick={() => setIsMenuOpen(false)}>Change Password</Link>
                                     </div>
                                 </div>
 
