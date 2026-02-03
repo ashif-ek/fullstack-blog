@@ -3,6 +3,8 @@ import React, { Suspense, lazy } from 'react';
 import LoadingFallback from "./components/LoadingFallback";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";  
+import Cookies from "js-cookie";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";  
 
 import { ToastProvider } from "./context/ToastContext";
 import { OurStory, Documentation, SubmissionGuidelines, PrivacyPolicy, TermsOfService, CookiePolicy } from "./pages/StaticPages";
@@ -15,12 +17,14 @@ const Profile = lazy(() => import("./pages/Profile"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function Logout() {
-    localStorage.clear()
+    Cookies.remove(ACCESS_TOKEN)
+    Cookies.remove(REFRESH_TOKEN)
     return <Navigate to="/login" />
 }
 
 function RegisterAndLogout() {
-    localStorage.clear()
+    Cookies.remove(ACCESS_TOKEN)
+    Cookies.remove(REFRESH_TOKEN)
     return <Register />
 }
 

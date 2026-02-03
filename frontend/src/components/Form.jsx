@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../api";
 import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import Cookies from "js-cookie";
 import { useToast } from "../context/ToastContext";
 import "../styles/Form.css"
 
@@ -21,8 +22,8 @@ function Form({ route, method }) {
         try {
             const res = await api.post(route, { email, password })
             if (method === "login") {
-                localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                Cookies.set(ACCESS_TOKEN, res.data.access);
+                Cookies.set(REFRESH_TOKEN, res.data.refresh);
                 navigate("/")
             } else {
                 navigate("/login")

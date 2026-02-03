@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
-import { ACCESS_TOKEN } from "../constants"
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
+import Cookies from "js-cookie"
 import { useState, useEffect } from "react"
 import api from "../api"
 
@@ -10,14 +11,14 @@ function Navbar() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem(ACCESS_TOKEN);
+        const token = Cookies.get(ACCESS_TOKEN);
         if (token) {
             setIsLoggedIn(true);
             fetchProfilePic();
         } else {
             setIsLoggedIn(false);
         }
-    }, [localStorage.getItem(ACCESS_TOKEN)]);
+    }, []);
 
     const fetchProfilePic = async () => {
         try {
@@ -31,7 +32,8 @@ function Navbar() {
     }
 
     const handleLogout = () => {
-        localStorage.clear();
+        Cookies.remove(ACCESS_TOKEN);
+        Cookies.remove(REFRESH_TOKEN); // Also remove refresh token if possible, though constant not imported yet
         setIsLoggedIn(false);
         setProfilePic(null);
         navigate("/login");

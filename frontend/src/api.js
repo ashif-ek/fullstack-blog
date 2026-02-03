@@ -1,5 +1,6 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode"; // Incorrect import fix later if needed, default export usually valid for jwt-decode depending on version. Actually named export is safer in new versions.
+import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
 
 export const ACCESS_TOKEN = "access";
 export const REFRESH_TOKEN = "refresh";
@@ -10,7 +11,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem(ACCESS_TOKEN);
+        const token = Cookies.get(ACCESS_TOKEN);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
