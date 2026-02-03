@@ -1,0 +1,25 @@
+Found 6 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.F..F.
+======================================================================
+FAIL: test_change_password_revokes_sessions (accounts.tests.test_sessions.SessionManagementTests.test_change_password_revokes_sessions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/accounts/tests/test_sessions.py", line 116, in test_change_password_revokes_sessions
+    self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+AssertionError: 401 != 403
+
+======================================================================
+FAIL: test_logout_revokes_access (accounts.tests.test_sessions.SessionManagementTests.test_logout_revokes_access)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/accounts/tests/test_sessions.py", line 66, in test_logout_revokes_access
+    self.assertEqual(
+AssertionError: 401 != 403
+
+----------------------------------------------------------------------
+Ran 6 tests in 12.175s
+
+FAILED (failures=2)
+Destroying test database for alias 'default'...

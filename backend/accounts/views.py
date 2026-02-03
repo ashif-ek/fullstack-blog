@@ -197,6 +197,7 @@ class ChangePasswordView(generics.UpdateAPIView):
 
             # set_password also hashes the password that the user will get
             self.object.set_password(serializer.data.get("new_password"))
+            self.object.token_version += 1
             self.object.save()
 
             # Revoke all sessions

@@ -39,7 +39,32 @@ class SessionJWTAuthentication(JWTAuthentication):
         if not session.is_active:
             raise AuthenticationFailed("Session is inactive.")
 
-        # 3. Update Last Used
+        # 3. Check Token Version
+        token_version = validated_token.get("token_version")
+        # If token has no version (old token) but user has version > 1, fail?
+        # Or just check if present. Let's assume strict if field exists.
+
+        # We need to fetch the user to check their version.
+        # Efficiently we could do this via the session.user if select_related,
+        # but session.user is a foreign key.
+        # Optimized: `session = UserSession.objects.select_related('user').get(...)`
+        # But `authenticate` returns (user, token). We usually fetch user at the end.
+
+        # Let's get the user from the session object (DB hit).
+        user = session.user
+
+        if token_version is not None:
+            if token_version != user.token_version:
+                raise AuthenticationFailed(
+                    "Token version mismatch. Please login again."
+                )
+        else:
+            # Backward compatibility or strict?
+            # If user.token_version > 1 and token has None, it's an old token.
+            if user.token_version > 1:
+                raise AuthenticationFailed("Token version invalid.")
+
+        # 4. Update Last Used
         session.save(update_fields=["last_used_at"])
 
         # 4. Return user and token

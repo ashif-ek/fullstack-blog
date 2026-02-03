@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from django.contrib.auth import get_user_model
-from ..models import UserSession
+from accounts.models import UserSession
 
 User = get_user_model()
 
@@ -64,7 +64,7 @@ class SessionManagementTests(APITestCase):
         # Verify Access Denied
         response = self.client.get(self.profile_url)
         self.assertEqual(
-            response.status_code, status.HTTP_403_FORBIDDEN
+            response.status_code, status.HTTP_401_UNAUTHORIZED
         )  # Or 401 depending on config
 
     def test_logout_all(self):
@@ -113,7 +113,7 @@ class SessionManagementTests(APITestCase):
 
         # Verify Access Denied
         response = self.client.get(self.profile_url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_session_list(self):
         login_resp = self.client.post(

@@ -10,6 +10,7 @@ from .views import (
     SessionListView,
     APILogoutView,
     LogoutAllView,
+    ChangePasswordView,
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -31,4 +32,5 @@ urlpatterns = [
     path(
         "api/logout-all/", LogoutAllView.as_view(), name="api_logout_all"
     ),  # All devices
+    path("api/change-password/", ChangePasswordView.as_view(), name="change_password"),
 ]

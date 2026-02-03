@@ -58,10 +58,12 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Embed 'session_id' into the tokens
         refresh["session_id"] = session_jti
+        refresh["token_version"] = self.user.token_version
 
         # Handle access token
         access = refresh.access_token
         access["session_id"] = session_jti
+        access["token_version"] = self.user.token_version
 
         # Update return data
         data["refresh"] = str(refresh)
