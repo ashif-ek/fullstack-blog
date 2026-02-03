@@ -14,10 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
 
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
-ALLOWED_HOSTS = os.getenv(
-    "ALLOWED_HOSTS",
-    "localhost,127.0.0.1,0.0.0.0"
-).split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0").split(",")
 
 
 # --------------------------------------------------
@@ -32,12 +29,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # Third-party
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
-
     # Local apps
     "accounts",
     "blog",
@@ -45,6 +40,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "config.middleware.RequestLogMiddleware",  # Custom Request Logging
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -102,7 +98,9 @@ DATABASES = {
 # PASSWORD VALIDATION
 # --------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -147,42 +145,9 @@ CORS_ALLOWED_ORIGINS = [
 # --------------------------------------------------
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "accounts.authentication.SessionJWTAuthentication",
     ),
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # import os
@@ -210,7 +175,6 @@ REST_FRAMEWORK = {
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:5173",
 # ]
-
 
 
 # # Application definition
@@ -324,4 +288,3 @@ REST_FRAMEWORK = {
 #     'rest_framework_simplejwt.authentication.JWTAuthentication',
 #     )
 # }
-
