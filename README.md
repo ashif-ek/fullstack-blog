@@ -1,6 +1,6 @@
 # Full-Stack Blog Application
 
-A production-ready, full-stack Blog Application designed with modern architecture principles. Built using **Django REST Framework** for a robust backend and **React (Vite)** for a high-performance frontend. This project features secure JWT authentication, session management, and a seamless CRUD experience for blog posts.
+A production-oriented, full-stack Blog Application designed with modern architecture principles. Built using **Django REST Framework** for a robust backend and **React (Vite)** for a high-performance frontend. This project features secure JWT authentication, session management, and a a stable domain surface to exercise authentication, session lifecycle, and API evolution.
 
 ## 🚀 Features
 
@@ -16,7 +16,7 @@ A production-ready, full-stack Blog Application designed with modern architectur
   - Session management (view active sessions, logout specific or all devices).
   - Password change and profile management endpoints.
 - **API Documentation**: Auto-generated Swagger and Redoc documentation via `drf-spectacular`.
-- **Blog Management**: ViewSet-based CRUD operations for blog posts.
+- **Blog Domain**: ViewSet-based endpoints used to evaluate authorization boundaries, soft deletes, and backward-compatible API changes
 
 ### Frontend (React + Vite)
 - **Modern UI**: Built with **Tailwind CSS** for responsive and utility-first styling.
@@ -63,22 +63,103 @@ The goal is not feature breadth, but system behavior under real constraints.
 ## 📂 Project Structure
 
 ```bash
-├── backend/                # Django Backend
-│   ├── accounts/           # User authentication & profile management
-│   ├── blog/               # Blog post logic
-│   ├── config/             # Project settings & URL routing
-│   ├── Dockerfile          # Backend container definition
-│   └── requirements.txt    # Python dependencies
-│
-├── frontend/               # React Frontend
-│   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── pages/          # Full page views
-│   │   └── Main.jsx        # App entry point
-│   ├── package.json        # Node dependencies
-│   └── vite.config.js      # Vite configuration
-│
-└── docker-compose.yml      # Orchestration for DB, Backend, Frontend
+Directory structure:
+└── ashif-ek-fullstack-blog/
+    ├── README.md
+    ├── docker-compose.yml
+    ├── backend/
+    │   ├── README.md
+    │   ├── Dockerfile
+    │   ├── manage.py
+    │   ├── requirements.txt
+    │   ├── test_output.txt
+    │   ├── .dockerignore
+    │   ├── accounts/
+    │   │   ├── __init__.py
+    │   │   ├── admin.py
+    │   │   ├── apps.py
+    │   │   ├── authentication.py
+    │   │   ├── forms.py
+    │   │   ├── models.py
+    │   │   ├── serializers.py
+    │   │   ├── tests.py
+    │   │   ├── urls.py
+    │   │   ├── views.py
+    │   │   ├── migrations/
+    │   │   │   ├── 0001_initial.py
+    │   │   │   ├── 0002_profile.py
+    │   │   │   ├── 0003_profile_image.py
+    │   │   │   ├── 0004_create_usersession.py
+    │   │   │   ├── 0005_user_token_version.py
+    │   │   │   └── __init__.py
+    │   │   └── tests/
+    │   │       ├── __init__.py
+    │   │       └── test_sessions.py
+    │   ├── blog/
+    │   │   ├── __init__.py
+    │   │   ├── admin.py
+    │   │   ├── apps.py
+    │   │   ├── models.py
+    │   │   ├── serializers.py
+    │   │   ├── urls.py
+    │   │   ├── views.py
+    │   │   └── migrations/
+    │   │       ├── 0001_initial.py
+    │   │       ├── 0002_post_image_alter_post_author.py
+    │   │       ├── 0003_post_why_i_wrote_this.py
+    │   │       ├── 0004_remove_post_why_i_wrote_this_post_deleted_at_and_more.py
+    │   │       └── __init__.py
+    │   └── config/
+    │       ├── __init__.py
+    │       ├── asgi.py
+    │       ├── decorators.py
+    │       ├── middleware.py
+    │       ├── settings.py
+    │       ├── urls.py
+    │       ├── utils.py
+    │       └── wsgi.py
+    ├── frontend/
+    │   ├── README.md
+    │   ├── Dockerfile
+    │   ├── eslint.config.js
+    │   ├── index.html
+    │   ├── package.json
+    │   ├── vite.config.js
+    │   ├── .dockerignore
+    │   └── src/
+    │       ├── api.js
+    │       ├── App.jsx
+    │       ├── constants.js
+    │       ├── index.css
+    │       ├── main.jsx
+    │       ├── components/
+    │       │   ├── ErrorBoundary.jsx
+    │       │   ├── Footer.jsx
+    │       │   ├── Form.jsx
+    │       │   ├── Layout.jsx
+    │       │   ├── LoadingFallback.jsx
+    │       │   ├── Navbar.jsx
+    │       │   ├── PostCard.jsx
+    │       │   └── ProtectedRoute.jsx
+    │       ├── context/
+    │       │   └── ToastContext.jsx
+    │       ├── pages/
+    │       │   ├── ChangePassword.jsx
+    │       │   ├── Home.jsx
+    │       │   ├── Login.jsx
+    │       │   ├── NotFound.jsx
+    │       │   ├── PostDetail.jsx
+    │       │   ├── Profile.jsx
+    │       │   ├── Register.jsx
+    │       │   └── StaticPages.jsx
+    │       └── styles/
+    │           └── Form.css
+    └── .github/
+        └── workflows/
+            ├── django.yml
+            ├── github-actions-demo.yml
+            └── node.js.yml
+
 ```
 
 ---
