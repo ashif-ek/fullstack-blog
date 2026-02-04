@@ -1,0 +1,23 @@
+name: Backend CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  backend-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build backend containers
+        run: docker-compose build backend
+
+      - name: Run migrations
+        run: docker-compose run backend python manage.py migrate
+
+      - name: Run backend tests
+        run: docker-compose run backend python manage.py test
