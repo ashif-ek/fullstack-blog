@@ -5,20 +5,10 @@ import { useState, useEffect } from "react"
 import api from "../api"
 
 function Navbar() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(() => !!Cookies.get(ACCESS_TOKEN));
     const [profilePic, setProfilePic] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu state
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const token = Cookies.get(ACCESS_TOKEN);
-        if (token) {
-            setIsLoggedIn(true);
-            fetchProfilePic();
-        } else {
-            setIsLoggedIn(false);
-        }
-    }, []);
 
     const fetchProfilePic = async () => {
         try {
@@ -26,10 +16,16 @@ function Navbar() {
             if (res.data.image) {
                 setProfilePic(res.data.image);
             }
-        } catch (e) {
+        } catch {
             // silent fail
         }
     }
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            fetchProfilePic();
+        }
+    }, [isLoggedIn]);
 
     const handleLogout = () => {
         Cookies.remove(ACCESS_TOKEN);

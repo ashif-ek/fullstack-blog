@@ -1,5 +1,5 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+
 import Cookies from "js-cookie";
 
 export const ACCESS_TOKEN = "access";

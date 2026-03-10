@@ -10,19 +10,19 @@ function PostDetail() {
     const navigate = useNavigate();
     const { addToast } = useToast();
 
-    useEffect(() => {
-        getPost();
-    }, [id]);
-
     const getPost = async () => {
         try {
             const res = await api.get(`/api/blog/posts/${id}/`);
             setPost(res.data);
-        } catch (err) {
+        } catch {
             addToast("Citation not found or access denied.", "error");
             navigate("/");
         }
     };
+
+    useEffect(() => {
+        getPost();
+    }, [id]);
 
     if (!post) return <Layout><div className="text-center mt-20 text-slate-500 font-serif animate-pulse">Loading Analysis...</div></Layout>;
 

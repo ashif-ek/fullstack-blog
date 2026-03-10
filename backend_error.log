@@ -1,0 +1,418 @@
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | System check identified no issues (0 silenced).
+backend-1  | February 03, 2026 - 14:58:10
+backend-1  | Django version 6.0, using settings 'config.settings'
+backend-1  | Starting development server at http://0.0.0.0:8000/
+backend-1  | Quit the server with CONTROL-C.
+backend-1  | 
+backend-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend-1  | For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/
+backend-1  | Unauthorized: /api/profile/
+backend-1  | [03/Feb/2026 14:58:25] "GET /api/profile/ HTTP/1.1" 401 172
+backend-1  | Unauthorized: /api/profile/
+backend-1  | [03/Feb/2026 14:58:25] "GET /api/profile/ HTTP/1.1" 401 172
+backend-1  | [03/Feb/2026 14:58:43] "POST /api/token/ HTTP/1.1" 200 665
+backend-1  | [03/Feb/2026 14:58:43] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:58:43] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [03/Feb/2026 14:58:43] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:58:43] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [03/Feb/2026 14:58:46] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:58:46] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:58:46] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:58:46] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:58:48] "GET /media/blog_images/beautiful-tree-middle-field-covered-with-grass-with-tree-line-background.jpg HTTP/1.1" 200 32794483
+backend-1  | [03/Feb/2026 14:58:53] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:58:53] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:59:07] "OPTIONS /api/change-password/ HTTP/1.1" 200 0
+backend-1  | [03/Feb/2026 14:59:09] "PUT /api/change-password/ HTTP/1.1" 200 64
+backend-1  | Unauthorized: /api/token/
+backend-1  | [03/Feb/2026 14:59:22] "POST /api/token/ HTTP/1.1" 401 63
+backend-1  | [03/Feb/2026 14:59:26] "POST /api/token/ HTTP/1.1" 200 665
+backend-1  | [03/Feb/2026 14:59:26] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:59:26] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [03/Feb/2026 14:59:26] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [03/Feb/2026 14:59:26] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:59:30] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:59:30] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:59:30] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:59:30] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 14:59:32] "GET /media/blog_images/beautiful-tree-middle-field-covered-with-grass-with-tree-line-background.jpg HTTP/1.1" 200 32794483
+backend-1  | [03/Feb/2026 15:41:09] "POST /api/token/refresh/ HTTP/1.1" 200 332
+backend-1  | [03/Feb/2026 15:41:09] "POST /api/token/refresh/ HTTP/1.1" 200 332
+backend-1  | [03/Feb/2026 15:41:09] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 15:41:09] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 15:41:09] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | [03/Feb/2026 15:41:10] "GET /api/profile/ HTTP/1.1" 200 85
+backend-1  | /app/config/settings.py changed, reloading.
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/app/manage.py", line 22, in <module>
+backend-1  |     main()
+backend-1  |   File "/app/manage.py", line 18, in main
+backend-1  |     execute_from_command_line(sys.argv)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/__init__.py", line 443, in execute_from_command_line
+backend-1  |     utility.execute()
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/__init__.py", line 383, in execute
+backend-1  |     settings.INSTALLED_APPS
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/conf/__init__.py", line 75, in __getattr__
+backend-1  |     self._setup(name)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/conf/__init__.py", line 62, in _setup
+backend-1  |     self._wrapped = Settings(settings_module)
+backend-1  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/conf/__init__.py", line 162, in __init__
+backend-1  |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend-1  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend-1  |   File "/usr/local/lib/python3.12/importlib/__init__.py", line 90, in import_module
+backend-1  |     return _bootstrap._gcd_import(name[level:], package, level)
+backend-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend-1  |   File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+backend-1  |   File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+backend-1  |   File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+backend-1  |   File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+backend-1  |   File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+backend-1  |   File "<frozen importlib._bootstrap_external>", line 1133, in get_code
+backend-1  |   File "<frozen importlib._bootstrap_external>", line 1063, in source_to_code
+backend-1  |   File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+backend-1  |   File "/app/config/settings.py", line 147
+backend-1  |     "DEFAULT_AUTHENTICATION_CLASSES": (
+backend-1  | IndentationError: unexpected indent
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/app/manage.py", line 22, in <module>
+backend-1  |     main()
+backend-1  |   File "/app/manage.py", line 18, in main
+backend-1  |     execute_from_command_line(sys.argv)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/__init__.py", line 443, in execute_from_command_line
+backend-1  |     utility.execute()
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/__init__.py", line 383, in execute
+backend-1  |     settings.INSTALLED_APPS
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/conf/__init__.py", line 75, in __getattr__
+backend-1  |     self._setup(name)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/conf/__init__.py", line 62, in _setup
+backend-1  |     self._wrapped = Settings(settings_module)
+backend-1  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/conf/__init__.py", line 162, in __init__
+backend-1  |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend-1  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend-1  |   File "/usr/local/lib/python3.12/importlib/__init__.py", line 90, in import_module
+backend-1  |     return _bootstrap._gcd_import(name[level:], package, level)
+backend-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend-1  |   File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+backend-1  |   File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+backend-1  |   File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+backend-1  |   File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+backend-1  |   File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+backend-1  |   File "<frozen importlib._bootstrap_external>", line 1133, in get_code
+backend-1  |   File "<frozen importlib._bootstrap_external>", line 1063, in source_to_code
+backend-1  |   File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+backend-1  |   File "/app/config/settings.py", line 147
+backend-1  |     "DEFAULT_AUTHENTICATION_CLASSES": (
+backend-1  | IndentationError: unexpected indent
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | System check identified no issues (0 silenced).
+backend-1  | February 03, 2026 - 16:15:01
+backend-1  | Django version 6.0, using settings 'config.settings'
+backend-1  | Starting development server at http://0.0.0.0:8000/
+backend-1  | Quit the server with CONTROL-C.
+backend-1  | 
+backend-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend-1  | For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/
+backend-1  | Not Found: /api/docs/
+backend-1  | [03/Feb/2026 16:15:27] "GET /api/docs/ HTTP/1.1" 404 6215
+backend-1  | Not Found: /favicon.ico
+backend-1  | [03/Feb/2026 16:15:27] "GET /favicon.ico HTTP/1.1" 404 6221
+backend-1  | [03/Feb/2026 16:15:37] "GET /api/schema/swagger-ui/ HTTP/1.1" 200 4650
+backend-1  | Not Found: /api/docs/
+backend-1  | [03/Feb/2026 16:16:02] "GET /api/docs/ HTTP/1.1" 404 6215
+backend-1  | Not Found: /api/docs/
+backend-1  | [03/Feb/2026 16:16:02] "GET /api/docs/ HTTP/1.1" 404 6215
+backend-1  | Not Found: /api/tokens/
+backend-1  | [03/Feb/2026 16:16:14] "GET /api/tokens/ HTTP/1.1" 404 6221
+backend-1  | Not Found: /api/tokens/
+backend-1  | [03/Feb/2026 16:17:25] "GET /api/tokens/ HTTP/1.1" 404 6221
+backend-1  | Not Found: /api/tokens/
+backend-1  | [03/Feb/2026 16:17:26] "GET /api/tokens/ HTTP/1.1" 404 6221
+backend-1  | Not Found: /api/tokens/
+backend-1  | [03/Feb/2026 16:17:26] "GET /api/tokens/ HTTP/1.1" 404 6221
+backend-1  | [03/Feb/2026 16:18:12] "GET /api/schema/swagger-ui/ HTTP/1.1" 200 4650
+backend-1  | /app/blog/views.py: Warning [PostViewSet]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ChangePasswordView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [APILogoutView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [APILogoutView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [LogoutAllView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [LogoutAllView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ProfileView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [RegisterAPIView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [SessionListView]: exception raised while getting serializer. Hint: Is get_serializer_class() returning None or is get_queryset() not working without a request? Ignoring the view for now. (Exception: 'SessionListView' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.)
+backend-1  | /app/accounts/views.py: Warning [SessionListView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | [03/Feb/2026 16:18:13] "GET /api/schema/ HTTP/1.1" 200 30120
+backend-1  | [03/Feb/2026 16:19:05] "GET /api/schema/redoc/ HTTP/1.1" 200 733
+backend-1  | /app/blog/views.py: Warning [PostViewSet]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ChangePasswordView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [APILogoutView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [APILogoutView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [LogoutAllView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [LogoutAllView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ProfileView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [RegisterAPIView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [SessionListView]: exception raised while getting serializer. Hint: Is get_serializer_class() returning None or is get_queryset() not working without a request? Ignoring the view for now. (Exception: 'SessionListView' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.)
+backend-1  | /app/accounts/views.py: Warning [SessionListView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | [03/Feb/2026 16:19:05] "GET /api/schema/ HTTP/1.1" 200 14296
+backend-1  | /app/blog/views.py: Warning [PostViewSet]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ChangePasswordView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [APILogoutView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [APILogoutView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [LogoutAllView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [LogoutAllView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ProfileView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [RegisterAPIView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [SessionListView]: exception raised while getting serializer. Hint: Is get_serializer_class() returning None or is get_queryset() not working without a request? Ignoring the view for now. (Exception: 'SessionListView' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.)
+backend-1  | /app/accounts/views.py: Warning [SessionListView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | [03/Feb/2026 16:19:15] "GET /api/schema/ HTTP/1.1" 200 14296
+backend-1  | /app/blog/views.py: Warning [PostViewSet]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ChangePasswordView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [APILogoutView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [APILogoutView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [LogoutAllView]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+backend-1  | /app/accounts/views.py: Warning [LogoutAllView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [ProfileView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Warning [RegisterAPIView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | /app/accounts/views.py: Error [SessionListView]: exception raised while getting serializer. Hint: Is get_serializer_class() returning None or is get_queryset() not working without a request? Ignoring the view for now. (Exception: 'SessionListView' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.)
+backend-1  | /app/accounts/views.py: Warning [SessionListView]: could not resolve authenticator <class 'accounts.authentication.SessionJWTAuthentication'>. There was no OpenApiAuthenticationExtension registered for that class. Try creating one by subclassing it. Ignoring for now.
+backend-1  | [03/Feb/2026 16:19:47] "GET /api/schema/ HTTP/1.1" 200 14296
+backend-1  | Not Found: /profile
+backend-1  | Not Found: /about
+backend-1  | Not Found: /skills
+backend-1  | [03/Feb/2026 16:26:55] "GET /profile HTTP/1.1" 404 6209
+backend-1  | Not Found: /tools
+backend-1  | [03/Feb/2026 16:26:55] "GET /about HTTP/1.1" 404 6203
+backend-1  | Not Found: /projects
+backend-1  | [03/Feb/2026 16:26:55] "GET /skills HTTP/1.1" 404 6206
+backend-1  | Not Found: /blogs
+backend-1  | Not Found: /certificates
+backend-1  | [03/Feb/2026 16:26:55] "GET /projects HTTP/1.1" 404 6212
+backend-1  | [03/Feb/2026 16:26:55] "GET /blogs?_sort=date&_order=desc HTTP/1.1" 404 6230
+backend-1  | [03/Feb/2026 16:26:55] "GET /certificates HTTP/1.1" 404 6224
+backend-1  | Not Found: /settings
+backend-1  | [03/Feb/2026 16:26:55] "GET /tools HTTP/1.1" 404 6203
+backend-1  | Not Found: /profile
+backend-1  | [03/Feb/2026 16:26:55] "GET /profile HTTP/1.1" 404 6209
+backend-1  | Not Found: /about
+backend-1  | [03/Feb/2026 16:26:55] "GET /settings HTTP/1.1" 404 6212
+backend-1  | Not Found: /projects
+backend-1  | [03/Feb/2026 16:26:55] "GET /about HTTP/1.1" 404 6203
+backend-1  | Not Found: /skills
+backend-1  | [03/Feb/2026 16:26:55] "GET /projects HTTP/1.1" 404 6212
+backend-1  | Not Found: /blogs
+backend-1  | [03/Feb/2026 16:26:55] "GET /blogs?_sort=date&_order=desc HTTP/1.1" 404 6230
+backend-1  | Not Found: /tools
+backend-1  | [03/Feb/2026 16:26:55] "GET /skills HTTP/1.1" 404 6206
+backend-1  | Not Found: /certificates
+backend-1  | [03/Feb/2026 16:26:55] "GET /tools HTTP/1.1" 404 6203
+backend-1  | Not Found: /settings
+backend-1  | [03/Feb/2026 16:26:55] "GET /certificates HTTP/1.1" 404 6224
+backend-1  | [03/Feb/2026 16:26:55] "GET /settings HTTP/1.1" 404 6212
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | System check identified no issues (0 silenced).
+backend-1  | March 05, 2026 - 12:05:49
+backend-1  | Django version 6.0, using settings 'config.settings'
+backend-1  | Starting development server at http://0.0.0.0:8000/
+backend-1  | Quit the server with CONTROL-C.
+backend-1  | 
+backend-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend-1  | For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/
+backend-1  | [05/Mar/2026 12:08:00] "OPTIONS /api/token/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:08:01] "POST /api/token/ HTTP/1.1" 200 665
+backend-1  | [05/Mar/2026 12:08:01] "OPTIONS /api/profile/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:08:01] "OPTIONS /api/blog/posts/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:08:01] "OPTIONS /api/blog/posts/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:08:01] "OPTIONS /api/profile/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:08:01] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:01] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [05/Mar/2026 12:08:01] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [05/Mar/2026 12:08:01] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:01] "GET /media/blog_images/pexels-tima-miroshnichenko-7033934.jpg HTTP/1.1" 200 379933
+backend-1  | [05/Mar/2026 12:08:02] "GET /media/blog_images/lucas-mendes-CyfmSpqNMD8-unsplash.jpg HTTP/1.1" 200 3175229
+backend-1  | [05/Mar/2026 12:08:03] "GET /media/profile_pics/cartoon-tropical-island-landscape.jpg HTTP/1.1" 200 6832257
+backend-1  | [05/Mar/2026 12:08:10] "GET /media/blog_images/beautiful-tree-middle-field-covered-with-grass-with-tree-line-background.jpg HTTP/1.1" 200 32794483
+backend-1  | [05/Mar/2026 12:08:34] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:34] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:34] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:34] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:38] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:38] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [05/Mar/2026 12:08:38] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:08:38] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [05/Mar/2026 12:09:45] "OPTIONS /api/blog/posts/3/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:09:45] "OPTIONS /api/blog/posts/3/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:09:45] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:09:45] "GET /api/blog/posts/3/ HTTP/1.1" 200 1247
+backend-1  | [05/Mar/2026 12:09:45] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:09:45] "GET /api/blog/posts/3/ HTTP/1.1" 200 1247
+backend-1  | [05/Mar/2026 12:09:48] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [05/Mar/2026 12:09:48] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:09:48] "GET /api/blog/posts/ HTTP/1.1" 200 4146
+backend-1  | [05/Mar/2026 12:09:48] "GET /api/profile/ HTTP/1.1" 200 169
+backend-1  | [05/Mar/2026 12:10:13] "POST /api/blog/posts/ HTTP/1.1" 201 260
+backend-1  | [05/Mar/2026 12:10:13] "GET /api/blog/posts/ HTTP/1.1" 200 4407
+backend-1  | [05/Mar/2026 12:10:13] "GET /media/blog_images/pexels-ktfoto-1271380.jpg HTTP/1.1" 200 2326106
+backend-1  | [05/Mar/2026 12:10:36] "OPTIONS /api/blog/posts/5/ HTTP/1.1" 200 0
+backend-1  | [05/Mar/2026 12:10:36] "DELETE /api/blog/posts/5/ HTTP/1.1" 204 0
+backend-1  | /app/blog/models.py changed, reloading.
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | Exception in thread django-main-thread:
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+backend-1  |     self.run()
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+backend-1  |     self._target(*self._args, **self._kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend-1  |     fn(*args, **kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend-1  |     self.check(**check_kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 569, in check
+backend-1  |     raise SystemCheckError(msg)
+backend-1  | django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+backend-1  | 
+backend-1  | ERRORS:
+backend-1  | blog.Post.search_vector: (postgres.E005) 'django.contrib.postgres' must be in INSTALLED_APPS in order to use SearchVectorField.
+backend-1  | 
+backend-1  | System check identified 1 issue (0 silenced).
+backend-1  | /app/blog/views.py changed, reloading.
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | Exception in thread django-main-thread:
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+backend-1  |     self.run()
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+backend-1  |     self._target(*self._args, **self._kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend-1  |     fn(*args, **kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend-1  |     self.check(**check_kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 569, in check
+backend-1  |     raise SystemCheckError(msg)
+backend-1  | django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+backend-1  | 
+backend-1  | ERRORS:
+backend-1  | blog.Post.search_vector: (postgres.E005) 'django.contrib.postgres' must be in INSTALLED_APPS in order to use SearchVectorField.
+backend-1  | 
+backend-1  | System check identified 1 issue (0 silenced).
+backend-1  | /app/blog/models.py changed, reloading.
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | Exception in thread django-main-thread:
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+backend-1  |     self.run()
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+backend-1  |     self._target(*self._args, **self._kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend-1  |     fn(*args, **kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend-1  |     self.check(**check_kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 569, in check
+backend-1  |     raise SystemCheckError(msg)
+backend-1  | django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+backend-1  | 
+backend-1  | ERRORS:
+backend-1  | blog.Post.search_vector: (postgres.E005) 'django.contrib.postgres' must be in INSTALLED_APPS in order to use SearchVectorField.
+backend-1  | 
+backend-1  | System check identified 1 issue (0 silenced).
+backend-1  | /app/blog/models.py changed, reloading.
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | Exception in thread django-main-thread:
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+backend-1  |     self.run()
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+backend-1  |     self._target(*self._args, **self._kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend-1  |     fn(*args, **kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend-1  |     self.check(**check_kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 569, in check
+backend-1  |     raise SystemCheckError(msg)
+backend-1  | django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+backend-1  | 
+backend-1  | ERRORS:
+backend-1  | blog.Post.search_vector: (postgres.E005) 'django.contrib.postgres' must be in INSTALLED_APPS in order to use SearchVectorField.
+backend-1  | 
+backend-1  | System check identified 1 issue (0 silenced).
+backend-1  | /app/blog/views.py changed, reloading.
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | Exception in thread django-main-thread:
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+backend-1  |     self.run()
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+backend-1  |     self._target(*self._args, **self._kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend-1  |     fn(*args, **kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend-1  |     self.check(**check_kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 569, in check
+backend-1  |     raise SystemCheckError(msg)
+backend-1  | django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+backend-1  | 
+backend-1  | ERRORS:
+backend-1  | blog.Post.search_vector: (postgres.E005) 'django.contrib.postgres' must be in INSTALLED_APPS in order to use SearchVectorField.
+backend-1  | 
+backend-1  | System check identified 1 issue (0 silenced).
+backend-1  | /app/config/settings.py changed, reloading.
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | Exception in thread django-main-thread:
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+backend-1  |     self.run()
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+backend-1  |     self._target(*self._args, **self._kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend-1  |     fn(*args, **kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend-1  |     self.check(**check_kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 569, in check
+backend-1  |     raise SystemCheckError(msg)
+backend-1  | django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+backend-1  | 
+backend-1  | ERRORS:
+backend-1  | blog.Post.search_vector: (postgres.E005) 'django.contrib.postgres' must be in INSTALLED_APPS in order to use SearchVectorField.
+backend-1  | 
+backend-1  | System check identified 1 issue (0 silenced).
+backend-1  | /app/accounts/views.py changed, reloading.
+backend-1  | Watching for file changes with StatReloader
+backend-1  | Performing system checks...
+backend-1  | 
+backend-1  | Exception in thread django-main-thread:
+backend-1  | Traceback (most recent call last):
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+backend-1  |     self.run()
+backend-1  |   File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+backend-1  |     self._target(*self._args, **self._kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend-1  |     fn(*args, **kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend-1  |     self.check(**check_kwargs)
+backend-1  |   File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 569, in check
+backend-1  |     raise SystemCheckError(msg)
+backend-1  | django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+backend-1  | 
+backend-1  | ERRORS:
+backend-1  | blog.Post.search_vector: (postgres.E005) 'django.contrib.postgres' must be in INSTALLED_APPS in order to use SearchVectorField.
+backend-1  | 
+backend-1  | System check identified 1 issue (0 silenced).

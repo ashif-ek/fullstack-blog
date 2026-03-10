@@ -24,7 +24,7 @@ function Profile() {
             setProfile(res.data);
             setEmail(res.data.email);
             setLoading(false);
-        } catch (err) {
+        } catch {
             addToast("Failed to retrieve profile credentials.", "error");
             setLoading(false);
         }

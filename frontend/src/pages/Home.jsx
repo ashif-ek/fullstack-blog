@@ -12,21 +12,28 @@ function Home() {
     const [preview, setPreview] = useState(null); // Preview state
     const [isCreating, setIsCreating] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
     
     const { addToast } = useToast();
 
-    useEffect(() => {
-        getPosts();
-    }, []);
-
-    const getPosts = () => {
-        api.get("/api/blog/posts/")
+    const getPosts = (query = "") => {
+        const url = query ? `/api/blog/posts/search/?q=${encodeURIComponent(query)}` : "/api/blog/posts/";
+        api.get(url)
             .then((res) => res.data)
             .then((data) => {
-                setPosts(data);
+                // DRF Paginated Response puts arrays in data.results
+                setPosts(data.results !== undefined ? data.results : data);
             })
-            .catch((err) => addToast("Failed to fetch research feed.", "error"));
+            .catch(() => addToast("Failed to fetch research feed.", "error"));
     };
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            getPosts(searchQuery);
+        }, 500);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchQuery]);
 
     const deletePost = (id) => {
         if (window.confirm("Are you sure you want to delete this citation?")) {
@@ -37,7 +44,7 @@ function Home() {
                         setPosts(posts.filter(post => post.id !== id));
                     }
                 })
-                .catch((error) => addToast("Failed to delete post.", "error"));
+                .catch(() => addToast("Failed to delete post.", "error"));
         }
     };
 
@@ -76,24 +83,38 @@ function Home() {
                     getPosts();
                 }
             })
-            .catch((err) => addToast("Failed to publish research.", "error"))
+            .catch(() => addToast("Failed to publish research.", "error"))
             .finally(() => setLoading(false));
     };
 
     return (
         <Layout>
             {/* Header Section */}
-            <div className="flex justify-between items-center mb-12 border-b-2 border-slate-900 pb-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b-2 border-slate-900 pb-6 gap-4">
                 <div>
                     <h1 className="text-4xl font-serif font-bold text-slate-900 tracking-tight">Research Feed</h1>
                     <p className="text-slate-500 mt-2 font-sans text-sm uppercase tracking-wide">Recent Publications & Findings</p>
                 </div>
-                <button 
-                    onClick={() => setIsCreating(!isCreating)}
-                    className="bg-slate-900 hover:bg-slate-700 text-white font-bold py-3 px-8 rounded-none shadow-sm transition duration-300 font-sans uppercase tracking-widest text-xs"
-                >
-                    {isCreating ? "Discard Draft" : "Submit Paper"}
-                </button>
+                <div className="flex w-full md:w-auto items-center gap-4">
+                    <div className="relative flex-grow md:w-64">
+                        <input
+                            type="text"
+                            placeholder="Search papers..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="bg-white border border-gray-300 w-full py-3 px-4 text-slate-900 text-sm focus:outline-none focus:border-slate-900 focus:ring-0 transition font-sans rounded-none"
+                        />
+                        <svg className="w-4 h-4 text-slate-400 absolute right-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <button 
+                        onClick={() => setIsCreating(!isCreating)}
+                        className="bg-slate-900 hover:bg-slate-700 text-white font-bold py-3 px-8 rounded-none shadow-sm transition duration-300 font-sans uppercase tracking-widest text-xs whitespace-nowrap"
+                    >
+                        {isCreating ? "Discard Draft" : "Submit Paper"}
+                    </button>
+                </div>
             </div>
 
             {/* Create Post Form */}

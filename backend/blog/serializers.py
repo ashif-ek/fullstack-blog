@@ -13,7 +13,8 @@ class PostSerializer(serializers.ModelSerializer):
             "content",
             "image",
             "author",
+            "views",
             "created_at",
             "updated_at",
         ]
-        read_only_fields = ["author", "created_at", "updated_at"]
+        read_only_fields = ["author", "views", "created_at", "updated_at"]

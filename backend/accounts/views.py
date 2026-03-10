@@ -3,11 +3,12 @@ from .forms import RegisterForm, LoginForm
 from django.contrib.auth.hashers import check_password
 from .models import User, Profile, UserSession
 
-from rest_framework import generics, permissions, status
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.throttling import AnonRateThrottle
 
 from .serializers import (
     RegisterSerializer,
@@ -100,8 +101,16 @@ class ProfileView(generics.RetrieveUpdateAPIView):
         return profile
 
 
+from rest_framework.throttling import AnonRateThrottle
+
+
+class LoginRateThrottle(AnonRateThrottle):
+    scope = "login"
+
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+    throttle_classes = [LoginRateThrottle]
 
 
 class SessionListView(generics.ListAPIView):
