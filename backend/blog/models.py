@@ -20,6 +20,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     views = models.IntegerField(default=0)
+    likes_count = models.PositiveIntegerField(default=0)
 
     # Soft Delete Fields
     is_deleted = models.BooleanField(default=False)

@@ -3,6 +3,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
 import Cookies from "js-cookie"
 import { useState, useEffect } from "react"
 import api from "../api"
+import NotificationBell from "./interactions/NotificationBell"
 
 function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(() => !!Cookies.get(ACCESS_TOKEN));
@@ -71,6 +72,7 @@ function Navbar() {
                                     )}
                                     Profile
                                 </Link>
+                                <NotificationBell />
                                 <button onClick={handleLogout} className="text-slate-400 hover:text-red-700 font-sans uppercase tracking-widest text-xs font-bold transition">Log Out</button>
                             </>
                         ) : (

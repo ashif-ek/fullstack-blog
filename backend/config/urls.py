@@ -12,6 +12,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("accounts.urls")),
     path("api/blog/", include("blog.urls")),
+    path("api/interactions/", include("interactions.urls")),
     # Swagger / OpenAPI
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(

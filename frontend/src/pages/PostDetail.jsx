@@ -3,12 +3,20 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import Layout from "../components/Layout";
 import { useToast } from "../context/ToastContext";
+import InteractionButtons from "../components/interactions/InteractionButtons";
+import CommentSection from "../components/interactions/CommentSection";
+import { useRef } from "react";
 
 function PostDetail() {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const navigate = useNavigate();
     const { addToast } = useToast();
+    const commentSectionRef = useRef(null);
+
+    const scrollToComments = () => {
+        commentSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     const getPost = async () => {
         try {
@@ -55,6 +63,15 @@ function PostDetail() {
                         {post.content.split('\n').map((paragraph, idx) => (
                              <p key={idx} className="mb-6">{paragraph}</p>
                         ))}
+                    </div>
+
+                    <InteractionButtons 
+                        post={post} 
+                        onCommentClick={scrollToComments} 
+                    />
+
+                    <div ref={commentSectionRef}>
+                        <CommentSection postId={post.id} />
                     </div>
 
                     <div className="mt-16 pt-8 border-t border-gray-200 flex justify-between items-center">
