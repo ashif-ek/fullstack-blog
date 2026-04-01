@@ -3,6 +3,7 @@ import os
 from celery import Celery
 
 from infra.celery import ResilientTask
+from infra.email import send_platform_email_task  # noqa: F401
 
 os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE",

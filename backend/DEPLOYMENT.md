@@ -3,19 +3,20 @@
 ## Target Topology
 
 - Frontend deploys independently on Vercel and reads `VITE_API_URL`.
-- Backend image deploys on AWS (EC2 or ECS) with 3 services:
+- Single EC2 host runs Docker Compose with 4 services:
   - `api` (Gunicorn + Django)
   - `worker` (Celery worker)
   - `beat` (Celery scheduler)
+- `redis` (local Redis container)
 - PostgreSQL is externalized through Neon (`DATABASE_URL`).
-- Redis is externalized through AWS ElastiCache (`REDIS_URL`).
+- Redis broker/cache URL is `redis://redis:6379/0`.
 
 ## Runtime Steps
 
 1. Build backend image:
-   - `docker compose -f docker-compose.prod.yml build`
+   - `docker compose build`
 2. Start backend stack:
-   - `docker compose -f docker-compose.prod.yml up -d`
+   - `docker compose up -d`
 3. API container runs:
    - Django migrations
    - `collectstatic`
@@ -29,7 +30,7 @@
 ## Required Environment Variables
 
 - `DATABASE_URL` (Neon Postgres URL with `sslmode=require`)
-- `REDIS_URL` (ElastiCache Redis endpoint)
+- `REDIS_URL` (default: `redis://redis:6379/0`)
 - `SECRET_KEY`
 - `ALLOWED_HOSTS`
 - `CORS_ALLOWED_ORIGINS`
@@ -41,5 +42,5 @@
 ## Notes
 
 - Frontend is no longer part of Docker orchestration.
-- Redis/Postgres are no longer containerized in compose.
+- Redis is containerized locally; PostgreSQL remains externalized on Neon.
 - Logging is JSON to stdout and includes request/user correlation fields.

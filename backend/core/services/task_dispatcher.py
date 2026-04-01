@@ -1,7 +1,10 @@
 import logging
+from json import dumps
 from typing import Any
 
 from celery.app.task import Task
+
+from infra.redis import get_redis_client, safe_redis_call
 
 logger = logging.getLogger(__name__)
 
@@ -23,5 +26,20 @@ def enqueue_task_safely(
         logger.exception(
             "Celery enqueue failed; task execution deferred",
             extra={"task_name": task.name, "queue": queue},
+        )
+        redis_client = get_redis_client()
+        safe_redis_call(
+            redis_client.rpush,
+            "celery:fallback_queue",
+            dumps(
+                {
+                    "task": task.name,
+                    "args": args,
+                    "kwargs": kwargs,
+                    "queue": queue,
+                    "countdown": countdown,
+                }
+            ),
+            default=None,
         )
         return None

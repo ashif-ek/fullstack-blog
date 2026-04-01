@@ -53,6 +53,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "config.middleware.RequestContextMiddleware",
+    "apps.interactions.middleware.idempotency.IdempotencyMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -76,14 +77,14 @@ TEMPLATES = [
     }
 ]
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL", "")
 if DATABASE_URL:
     DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=60,
             conn_health_checks=True,
-            ssl_require=True,
+            ssl_require=not env_bool("DEBUG", False),
         )
     }
 else:
@@ -110,6 +111,7 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -133,8 +135,6 @@ if cloud_name and cloud_key and cloud_secret:
         "API_KEY": cloud_key,
         "API_SECRET": cloud_secret,
     }
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = env_list("CORS_ALLOWED_ORIGINS")
@@ -167,10 +167,9 @@ CACHES = {
     "default": build_django_cache_config(REDIS_URL),
 }
 
-CELERY_BROKER_URL = REDIS_URL or "memory://"
-CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", REDIS_URL or "cache+memory://")
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
 CELERY_CACHE_BACKEND = "default"
-
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_BROKER_CONNECTION_MAX_RETRIES = None
 CELERY_BROKER_POOL_LIMIT = int(os.getenv("CELERY_BROKER_POOL_LIMIT", "20"))
@@ -185,45 +184,54 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {
     "visibility_timeout": 3600,
     "socket_timeout": 5,
     "socket_connect_timeout": 5,
-    "retry_policy": {
-        "timeout": 30,
-        "max_retries": 5,
-        "interval_start": 0,
-        "interval_step": 0.5,
-        "interval_max": 5,
-    },
 }
-
 CELERY_TASK_DEFAULT_QUEUE = "default"
 CELERY_TASK_DEFAULT_EXCHANGE = "tasks"
 CELERY_TASK_DEFAULT_EXCHANGE_TYPE = "direct"
 CELERY_TASK_DEFAULT_ROUTING_KEY = "default"
-
 CELERY_TASK_QUEUES = (
     Queue("high_priority", Exchange("tasks"), routing_key="high_priority"),
     Queue("default", Exchange("tasks"), routing_key="default"),
     Queue("low_priority", Exchange("tasks"), routing_key="low_priority"),
 )
-
 CELERY_TASK_ROUTES = {
-    "apps.interactions.tasks.high_priority_*": {
+    "apps.interactions.tasks.sync_likes_to_db_task": {
         "queue": "high_priority",
         "routing_key": "high_priority",
     },
-    "apps.interactions.tasks.low_priority_*": {
+    "apps.interactions.tasks.process_share_event_task": {
+        "queue": "default",
+        "routing_key": "default",
+    },
+    "apps.interactions.tasks.flush_notifications_task": {
+        "queue": "low_priority",
+        "routing_key": "low_priority",
+    },
+    "infra.email.send_platform_email_task": {
         "queue": "low_priority",
         "routing_key": "low_priority",
     },
 }
-
 CELERY_TASK_ACKS_LATE = True
 CELERY_TASK_REJECT_ON_WORKER_LOST = True
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1
-CELERY_WORKER_MAX_TASKS_PER_CHILD = int(os.getenv("CELERY_WORKER_MAX_TASKS_PER_CHILD", "200"))
-CELERY_WORKER_MAX_MEMORY_PER_CHILD = int(os.getenv("CELERY_WORKER_MAX_MEMORY_PER_CHILD", "256000"))
-CELERY_TASK_SOFT_TIME_LIMIT = int(os.getenv("CELERY_TASK_SOFT_TIME_LIMIT", "60"))
-CELERY_TASK_TIME_LIMIT = int(os.getenv("CELERY_TASK_TIME_LIMIT", "90"))
+CELERY_TASK_TIME_LIMIT = 30
+CELERY_TASK_SOFT_TIME_LIMIT = 25
 CELERY_RESULT_EXPIRES = int(os.getenv("CELERY_RESULT_EXPIRES", "3600"))
+CELERY_BEAT_SCHEDULE = {
+    "replay-fallback-queue-every-minute": {
+        "task": "apps.interactions.tasks.replay_fallback_queue_task",
+        "schedule": 60.0,
+    }
+}
+
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "no-reply@example.com")
 
 LOGGING = {
     "version": 1,

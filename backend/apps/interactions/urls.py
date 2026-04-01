@@ -1,11 +1,9 @@
-from django.http import JsonResponse
 from django.urls import path
 
-
-def interactions_ping(_request):
-    return JsonResponse({"status": "ok"})
-
+from apps.interactions.views import CommentListCreateView, LikeView, ShareView
 
 urlpatterns = [
-    path("ping/", interactions_ping),
+    path("likes/", LikeView.as_view(), name="interaction-like"),
+    path("comments/", CommentListCreateView.as_view(), name="interaction-comments"),
+    path("shares/", ShareView.as_view(), name="interaction-shares"),
 ]

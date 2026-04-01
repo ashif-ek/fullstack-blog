@@ -6,9 +6,48 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      DJANGO_SETTINGS_MODULE: config.settings.dev
-    volumes:
-      - ./backend:/app
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      REDIS_URL: redis://redis:6379/0
     ports:
       - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - redis
+    command: celery -A config worker -l info -Q high_priority,default,low_priority --concurrency=2 --max-tasks-per-child=200
+    restart: unless-stopped
+
+  beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - redis
+    command: celery -A config beat -l info
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  redis_data:
