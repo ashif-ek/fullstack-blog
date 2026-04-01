@@ -7,6 +7,9 @@ DEBUG = False
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL must be set in production.")
 
+if not os.getenv("REDIS_URL"):
+    raise RuntimeError("REDIS_URL must be set in production.")
+
 if DATABASES["default"]["ENGINE"] == "django.db.backends.sqlite3":
     raise RuntimeError("SQLite is not allowed for production deployments.")
 
@@ -24,3 +27,6 @@ X_FRAME_OPTIONS = "DENY"
 ALLOWED_HOSTS = env_list("ALLOWED_HOSTS")  # noqa: F405
 CORS_ALLOWED_ORIGINS = env_list("CORS_ALLOWED_ORIGINS")  # noqa: F405
 CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS")  # noqa: F405
+
+if not CORS_ALLOWED_ORIGINS:
+    raise RuntimeError("CORS_ALLOWED_ORIGINS must include the deployed Vercel frontend.")
