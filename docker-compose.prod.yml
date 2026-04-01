@@ -1,0 +1,62 @@
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: blog-backend:latest
+    env_file:
+      - ./backend/.env.prod
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      PYTHONUNBUFFERED: "1"
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 60 --access-logfile - --error-logfile -"
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  worker:
+    image: blog-backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env.prod
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      PYTHONUNBUFFERED: "1"
+    command: celery -A config worker -l info -Q high_priority,default,low_priority --concurrency=2 --max-tasks-per-child=200
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+
+  beat:
+    image: blog-backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env.prod
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      PYTHONUNBUFFERED: "1"
+    command: celery -A config beat -l info
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy

@@ -2,12 +2,14 @@ asgiref==3.11.0
 Django==6.0
 psycopg2-binary==2.9.11
 python-dotenv==1.2.1
+dj-database-url==3.0.1
 sqlparse==0.5.4
 tzdata==2025.3
 djangorestframework
 djangorestframework-simplejwt
 django-cors-headers
 django-environ
+whitenoise
 gunicorn
 Pillow
 drf-spectacular
@@ -19,3 +21,4 @@ celery
 redis
 django-redis
 django-celery-beat
+kombu
