@@ -52,6 +52,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "interactions.middleware.idempotency.IdempotencyMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -85,19 +86,19 @@ TEMPLATES = [
 ]
 
 
+import environ
+
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
 # --------------------------------------------------
-# DATABASE (PostgreSQL – Docker-correct)
+# DATABASE (Neon - Using DATABASE_URL)
 # --------------------------------------------------
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST", "db"),
-        "PORT": os.getenv("DB_PORT", "5432"),
-    }
+    "default": env.db("DATABASE_URL")
 }
+DATABASES["default"]["OPTIONS"] = {"sslmode": "require"}
 
 
 # --------------------------------------------------

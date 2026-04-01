@@ -12,6 +12,8 @@ class Comment(models.Model):
         "self", on_delete=models.CASCADE, null=True, blank=True, related_name="replies"
     )
     content = models.TextField()
+    depth = models.PositiveSmallIntegerField(default=1)  # 1: top-level, 2: reply, 3: sub-reply
+    reply_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
@@ -19,14 +21,21 @@ class Comment(models.Model):
     class Meta:
         ordering = ["-created_at"]
 
+    def save(self, *args, **kwargs):
+        if self.parent:
+            self.depth = self.parent.depth + 1
+            if self.depth > 3:
+                raise ValueError("Max nesting depth of 3 exceeded.")
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"Comment by {self.author} on {self.post}"
+        return f"Comment by {self.author} on {self.post} (Depth: {self.depth})"
 
 
 class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes_set")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
 
     class Meta:
         unique_together = ("post", "user")

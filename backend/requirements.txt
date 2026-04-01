@@ -15,7 +15,7 @@ cloudinary
 django-cloudinary-storage
 
 # Interactions System
-celery==5.4.0
-redis==5.2.1
-django-redis==5.4.0
-django-celery-beat==2.7.0
+celery
+redis
+django-redis
+django-celery-beat
