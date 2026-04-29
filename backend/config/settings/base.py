@@ -16,8 +16,10 @@ def env_bool(name: str, default: bool = False) -> bool:
     return os.getenv(name, str(default)).strip().lower() in {"1", "true", "yes", "on"}
 
 
-def env_list(name: str, default: str = "") -> list[str]:
+def env_list(name: str, default: any = "") -> list[str]:
     raw = os.getenv(name, default)
+    if isinstance(raw, list):
+        return raw
     return [item.strip() for item in raw.split(",") if item.strip()]
 
 
@@ -82,7 +84,7 @@ if DATABASE_URL:
     DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
-            conn_max_age=60,
+            conn_max_age=0,
             conn_health_checks=True,
             ssl_require=not env_bool("DEBUG", False),
         )
@@ -95,10 +97,9 @@ else:
         }
     }
 
-if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
+if DATABASES["default"].get("ENGINE") == "django.db.backends.postgresql":
     db_options = DATABASES["default"].setdefault("OPTIONS", {})
     db_options.setdefault("connect_timeout", 5)
-    db_options.setdefault("options", "-c statement_timeout=5000")
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

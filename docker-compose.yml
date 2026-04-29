@@ -11,7 +11,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     restart: unless-stopped
 
   worker:
@@ -24,7 +25,8 @@ services:
       DJANGO_SETTINGS_MODULE: config.settings.prod
       REDIS_URL: redis://redis:6379/0
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     command: celery -A config worker -l info -Q high_priority,default,low_priority --concurrency=2 --max-tasks-per-child=200
     restart: unless-stopped
 
@@ -38,7 +40,8 @@ services:
       DJANGO_SETTINGS_MODULE: config.settings.prod
       REDIS_URL: redis://redis:6379/0
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     command: celery -A config beat -l info
     restart: unless-stopped
 
@@ -47,6 +50,11 @@ services:
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
     restart: unless-stopped
 
 volumes:
