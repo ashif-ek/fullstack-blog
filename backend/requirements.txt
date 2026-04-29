@@ -22,3 +22,4 @@ redis
 django-redis
 django-celery-beat
 kombu
+django-simple-history

@@ -1,11 +1,10 @@
-from django.http import JsonResponse
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import PostViewSet
 
-
-def blog_ping(_request):
-    return JsonResponse({"status": "ok"})
-
+router = DefaultRouter()
+router.register(r'posts', PostViewSet)
 
 urlpatterns = [
-    path("ping/", blog_ping),
+    path('', include(router.urls)),
 ]

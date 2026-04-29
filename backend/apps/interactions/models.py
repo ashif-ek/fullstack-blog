@@ -3,6 +3,7 @@ from __future__ import annotations
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from simple_history.models import HistoricalRecords
 
 
 class Comment(models.Model):
@@ -28,6 +29,9 @@ class Comment(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Database Versioning / History
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ("-created_at",)
