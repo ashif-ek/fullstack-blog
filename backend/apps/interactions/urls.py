@@ -1,9 +1,13 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from apps.interactions.views import LikeView, ShareView, NotificationViewSet, CommentViewSet
 
-from apps.interactions.views import CommentListCreateView, LikeView, ShareView
+router = DefaultRouter()
+router.register(r'notifications', NotificationViewSet, basename='notification')
+router.register(r'comments', CommentViewSet, basename='comment')
 
 urlpatterns = [
-    path("likes/", LikeView.as_view(), name="interaction-like"),
-    path("comments/", CommentListCreateView.as_view(), name="interaction-comments"),
-    path("shares/", ShareView.as_view(), name="interaction-shares"),
+    path('', include(router.urls)),
+    path("posts/<int:post_id>/like/", LikeView.as_view(), name="interaction-like"),
+    path("posts/<int:post_id>/share/", ShareView.as_view(), name="interaction-share"),
 ]

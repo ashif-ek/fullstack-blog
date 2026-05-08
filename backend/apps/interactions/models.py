@@ -48,6 +48,22 @@ class PostLikeCounter(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+class UserPostLike(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="likes",
+    )
+    post_id = models.PositiveBigIntegerField(db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("user", "post_id")
+        indexes = [
+            models.Index(fields=["user", "post_id"]),
+        ]
+
+
 class NotificationDigest(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -59,3 +75,27 @@ class NotificationDigest(models.Model):
     payload = models.JSONField(default=dict)
     delivered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Notification(models.Model):
+    recipient = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="notifications"
+    )
+    actor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="actions"
+    )
+    verb = models.CharField(max_length=255) # e.g., "like", "comment", "share"
+    target_id = models.PositiveBigIntegerField(null=True, blank=True)
+    target_type = models.CharField(max_length=50, null=True, blank=True) # e.g., "post"
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.actor} {self.verb}ed something for {self.recipient}"

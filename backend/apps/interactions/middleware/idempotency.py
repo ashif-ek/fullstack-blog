@@ -21,8 +21,13 @@ class IdempotencyMiddleware:
         if request.method not in IDEMPOTENT_METHODS or not request.path.startswith("/api/"):
             return self.get_response(request)
 
+        # Allow auth and docs endpoints without idempotency key
+        exempt_paths = {"/api/register/", "/api/login/", "/api/token/refresh/", "/api/docs/"}
         key = request.headers.get("Idempotency-Key")
+        
         if not key:
+            if request.path in exempt_paths:
+                return self.get_response(request)
             return JsonResponse(
                 {"detail": "Idempotency-Key header is required for write operations."},
                 status=400,

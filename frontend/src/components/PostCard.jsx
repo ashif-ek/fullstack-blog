@@ -11,7 +11,11 @@ function PostCard({ post, onDelete }) {
         <div className="group bg-white border border-gray-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300">
             {post.image && (
                 <div className="h-56 overflow-hidden relative border-b border-gray-100">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img 
+                        src={post.image.startsWith('http') ? post.image : `${import.meta.env.VITE_API_URL}${post.image}`} 
+                        alt={post.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
                 </div>
             )}
             

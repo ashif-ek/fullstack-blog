@@ -100,6 +100,11 @@ else:
         }
     }
 
+AUTHENTICATION_BACKENDS = [
+    'apps.accounts.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 if DATABASES["default"].get("ENGINE") == "django.db.backends.postgresql":
     db_options = DATABASES["default"].setdefault("OPTIONS", {})
     db_options.setdefault("connect_timeout", 5)
@@ -122,10 +127,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
+# Default to local storage
 STORAGES = {
     "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
@@ -135,14 +142,32 @@ STORAGES = {
 cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME")
 cloud_key = os.getenv("CLOUDINARY_API_KEY")
 cloud_secret = os.getenv("CLOUDINARY_API_SECRET")
+
 if cloud_name and cloud_key and cloud_secret:
     CLOUDINARY_STORAGE = {
         "CLOUD_NAME": cloud_name,
         "API_KEY": cloud_key,
         "API_SECRET": cloud_secret,
     }
+    # Switch to Cloudinary if credentials exist
+    STORAGES["default"] = {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    }
 
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "idempotency-key",
+]
 CORS_ALLOWED_ORIGINS = env_list("CORS_ALLOWED_ORIGINS")
 CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS")
 

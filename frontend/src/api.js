@@ -1,6 +1,6 @@
 import axios from "axios";
-
 import Cookies from "js-cookie";
+import { v4 as uuidv4 } from 'uuid';
 
 export const ACCESS_TOKEN = "access";
 export const REFRESH_TOKEN = "refresh";
@@ -29,6 +29,13 @@ api.interceptors.request.use(
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
+
+        // Automatically add an Idempotency-Key for write operations
+        const writeMethods = ['post', 'put', 'patch', 'delete'];
+        if (writeMethods.includes(config.method.toLowerCase())) {
+            config.headers['Idempotency-Key'] = uuidv4();
+        }
+
         return config;
     },
     (error) => {
