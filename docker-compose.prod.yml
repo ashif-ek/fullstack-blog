@@ -1,4 +1,16 @@
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: blog-frontend:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+
   api:
     build:
       context: ./backend
