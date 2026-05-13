@@ -1,300 +1,197 @@
-# Full-Stack Blog Application
+<div align="center">
+  <h1>🚀 NexusFlow | Enterprise Full-Stack Web Architecture</h1>
+  <p><strong>A production-ready, highly scalable blog and interaction platform built with Django REST Framework, React (Vite), and Docker.</strong></p>
 
-A production-oriented, full-stack Blog Application designed with modern architecture principles. Built using **Django REST Framework** for a robust backend and **React (Vite)** for a high-performance frontend. This project features secure JWT authentication, session management, and a a stable domain surface to exercise authentication, session lifecycle, and API evolution.
-
-## 🚀 Features
-
-### Core
-- **Full-Stack Architecture**: Decoupled usage of Django (Backend) and React (Frontend).
-- **Dockerized Setup**: Ready-to-use `docker-compose.yml` for database, backend, and frontend services.
-- **PostgreSQL Database**: Configured for robust data handling (switchable to SQLite for dev).
-
-### Backend (Django + DRF)
-- **Secure Authentication**: 
-  - JWT (JSON Web Token) authentication via `simplejwt`.
-  - Custom User model extending `AbstractUser`.
-  - Session management (view active sessions, logout specific or all devices).
-  - Password change and profile management endpoints.
-- **API Documentation**: Auto-generated Swagger and Redoc documentation via `drf-spectacular`.
-- **Blog Domain**: ViewSet-based endpoints used to evaluate authorization boundaries, soft deletes, and backward-compatible API changes
-
-### Frontend (React + Vite)
-- **Modern UI**: Built with **Tailwind CSS** for responsive and utility-first styling.
-- **State Management**: Context API or efficient prop drilling (based on current inspection).
-- **Client-Side Routing**: `react-router-dom` for seamless page transitions.
-- **Axios Interceptor**: Centralized API request handling with auto-token attachments.
+  [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org)
+  [![Django](https://img.shields.io/badge/Django-5.x-092E20.svg)](https://www.djangoproject.com/)
+  [![React](https://img.shields.io/badge/React-19-61DAFB.svg)](https://reactjs.org/)
+  [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+</div>
 
 ---
 
-## 🛠 Tech Stack
+## 🎯 The Problem & Our Solution
 
-### Backend
-- **Framework**: Django 5.x, Django REST Framework
-- **Auth**: djangorestframework-simplejwt
-- **Docs**: drf-spectacular
-- **Database**: PostgreSQL (Production/Docker), SQLite (Local Dev)
-- **Container**: Docker, Docker Compose
+**The Problem:** Most tutorial applications skip the hard parts of software engineering. They build a blog, but they ignore session hijacking, cache stampedes, N+1 query problems, concurrent background processing, and deployment parity. They lack the structural integrity required to run reliably in a production environment like AWS EC2.
 
-### Frontend
-- **Framework**: React 19
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **HTTP Client**: Axios
-- **Routing**: React Router DOM v7
+**The Solution:** NexusFlow is designed as a *blueprint for real-world engineering*. While its domain is a "Blog Platform," its true purpose is to demonstrate robust backend engineering and modern frontend performance. 
+
+It solves critical production constraints by implementing:
+- **Strict JWT Lifecycle Management** (Versioning, forced invalidation, multi-device tracking).
+- **Idempotency** for write operations (preventing double charges/posts).
+- **Asynchronous Task Processing** via Celery & Redis to offload heavy workloads.
+- **Containerized Parity** guaranteeing that what works locally, works flawlessly on AWS.
 
 ---
 
-## 🎯 Engineering Focus
+## 📊 System Architecture & Data Flow
 
-This project intentionally uses a simple blog domain to focus on
-engineering concerns that are often skipped in demo applications:
+Our architecture is strictly decoupled. The React client acts as an independent entity communicating via a RESTful JSON API with our Django core, which in turn delegates asynchronous workloads to Celery workers.
 
-- JWT token versioning and forced invalidation
-- Multi-device session management
-- Additive, non-breaking API evolution
-- Environment parity via Docker
-- Auth-related rate limiting
-- Request traceability and failure visibility
-- CI-enforced correctness through automated tests
+```mermaid
+graph TD
+    Client[Web Browser / React Client]
+    Nginx[Nginx Reverse Proxy / Load Balancer]
+    API[Django REST API / Gunicorn]
+    DB[(PostgreSQL Database)]
+    Redis[(Redis Message Broker & Cache)]
+    Worker[Celery Worker Nodes]
+    Beat[Celery Beat Scheduler]
 
-The goal is not feature breadth, but system behavior under real constraints.
-
-
-## 📂 Project Structure
-
-```bash
-Directory structure:
-└── ashif-ek-fullstack-blog/
-    ├── README.md
-    ├── docker-compose.yml
-    ├── backend/
-    │   ├── README.md
-    │   ├── Dockerfile
-    │   ├── manage.py
-    │   ├── requirements.txt
-    │   ├── test_output.txt
-    │   ├── .dockerignore
-    │   ├── accounts/
-    │   │   ├── __init__.py
-    │   │   ├── admin.py
-    │   │   ├── apps.py
-    │   │   ├── authentication.py
-    │   │   ├── forms.py
-    │   │   ├── models.py
-    │   │   ├── serializers.py
-    │   │   ├── tests.py
-    │   │   ├── urls.py
-    │   │   ├── views.py
-    │   │   ├── migrations/
-    │   │   │   ├── 0001_initial.py
-    │   │   │   ├── 0002_profile.py
-    │   │   │   ├── 0003_profile_image.py
-    │   │   │   ├── 0004_create_usersession.py
-    │   │   │   ├── 0005_user_token_version.py
-    │   │   │   └── __init__.py
-    │   │   └── tests/
-    │   │       ├── __init__.py
-    │   │       └── test_sessions.py
-    │   ├── blog/
-    │   │   ├── __init__.py
-    │   │   ├── admin.py
-    │   │   ├── apps.py
-    │   │   ├── models.py
-    │   │   ├── serializers.py
-    │   │   ├── urls.py
-    │   │   ├── views.py
-    │   │   └── migrations/
-    │   │       ├── 0001_initial.py
-    │   │       ├── 0002_post_image_alter_post_author.py
-    │   │       ├── 0003_post_why_i_wrote_this.py
-    │   │       ├── 0004_remove_post_why_i_wrote_this_post_deleted_at_and_more.py
-    │   │       └── __init__.py
-    │   └── config/
-    │       ├── __init__.py
-    │       ├── asgi.py
-    │       ├── decorators.py
-    │       ├── middleware.py
-    │       ├── settings.py
-    │       ├── urls.py
-    │       ├── utils.py
-    │       └── wsgi.py
-    ├── frontend/
-    │   ├── README.md
-    │   ├── Dockerfile
-    │   ├── eslint.config.js
-    │   ├── index.html
-    │   ├── package.json
-    │   ├── vite.config.js
-    │   ├── .dockerignore
-    │   └── src/
-    │       ├── api.js
-    │       ├── App.jsx
-    │       ├── constants.js
-    │       ├── index.css
-    │       ├── main.jsx
-    │       ├── components/
-    │       │   ├── ErrorBoundary.jsx
-    │       │   ├── Footer.jsx
-    │       │   ├── Form.jsx
-    │       │   ├── Layout.jsx
-    │       │   ├── LoadingFallback.jsx
-    │       │   ├── Navbar.jsx
-    │       │   ├── PostCard.jsx
-    │       │   └── ProtectedRoute.jsx
-    │       ├── context/
-    │       │   └── ToastContext.jsx
-    │       ├── pages/
-    │       │   ├── ChangePassword.jsx
-    │       │   ├── Home.jsx
-    │       │   ├── Login.jsx
-    │       │   ├── NotFound.jsx
-    │       │   ├── PostDetail.jsx
-    │       │   ├── Profile.jsx
-    │       │   ├── Register.jsx
-    │       │   └── StaticPages.jsx
-    │       └── styles/
-    │           └── Form.css
-    └── .github/
-        └── workflows/
-            ├── django.yml
-            ├── github-actions-demo.yml
-            └── node.js.yml
-
+    Client -- HTTPS --> Nginx
+    Nginx -- Serves Static Assets --> Client
+    Nginx -- Proxies /api/ --> API
+    API -- Read/Write --> DB
+    API -- Queues Tasks --> Redis
+    Redis -- Dispatches Tasks --> Worker
+    Worker -- Updates State --> DB
+    Beat -- Schedules Cron Jobs --> Redis
 ```
 
 ---
 
-## ⚡ Getting Started
+## 🔄 Request Lifecycle: Authentication Flow
 
-### Option 1: Docker (Recommended)
-Run the entire stack with a single command.
+Understanding how we securely handle authentication across the stack:
 
-1. **Clone the repository**:
+```mermaid
+sequenceDiagram
+    participant User
+    participant React UI
+    participant Django API
+    participant Database
+
+    User->>React UI: Enters Credentials
+    React UI->>Django API: POST /api/token/ (Username, Password)
+    Django API->>Database: Validate Credentials & Create Session
+    Database-->>Django API: User & Session ID
+    Django API-->>React UI: Return Access & Refresh Tokens (HTTP)
+    React UI->>React UI: Store Tokens (Cookies/Memory)
+    
+    Note over User,Database: Subsequent Secure Request
+    User->>React UI: Clicks "Create Post"
+    React UI->>Django API: POST /api/blog/posts/ (Header: Bearer Token)
+    Django API->>Django API: Verify JWT Signature & Expiration
+    Django API->>Database: Verify Token Version (Invalidation Check)
+    Django API->>Database: Save Post
+    Django API-->>React UI: 201 Created
+```
+
+---
+
+## ✨ Elite Features
+
+### 🔐 Advanced Security & Auth
+- **Multi-Device Session Management:** Users can view where they are logged in and remotely revoke access to specific devices (e.g., "Log out of my phone").
+- **Token Versioning:** Instantaneous global logout capabilities that immediately invalidate all issued JWTs without waiting for expiration.
+- **Idempotency Middleware:** Safe retry mechanisms for network failures. A network blip won't result in publishing the same post twice.
+
+### ⚡ Performance & Scalability
+- **Celery & Redis:** Background task processing for email sending, heavy computations, and scheduled maintenance. 
+- **Nginx Reverse Proxy:** Serves Vite-compiled static assets efficiently while routing API requests to the WSGI/ASGI application.
+- **Optimized Database Queries:** Strategic use of `select_related` and `prefetch_related` in Django to eliminate N+1 queries during feed generation.
+
+### 🎨 Modern Frontend Experience
+- **Vite-Powered React:** Lightning-fast HMR during development and optimized tree-shaking for production builds.
+- **Axios Interceptors:** Centralized logic for attaching auth tokens and gracefully handling 401 Unauthorized errors (automatic token refreshing).
+- **Tailwind CSS:** Responsive, utility-first design system ensuring mobile-first compatibility.
+
+---
+
+## 🛠 Technical Stack & Decisions
+
+| Layer | Technology | Why We Chose It |
+|-------|------------|-----------------|
+| **Frontend** | React 19, Vite, Tailwind CSS | Vite offers superior build times over Webpack. Tailwind ensures consistency. |
+| **Backend** | Django 5.x, DRF | Unmatched ORM capabilities and rapid REST endpoint generation. |
+| **Auth** | `djangorestframework-simplejwt` | Stateless JWTs paired with database-backed token versioning for the best of both worlds. |
+| **Broker/Cache**| Redis 7-alpine | In-memory speeds vital for Celery message brokering and rate-limiting. |
+| **Workers** | Celery | Industry standard for decoupled, asynchronous Python task execution. |
+| **Infrastructure**| Docker & Docker Compose | Eliminates "It works on my machine." Provides seamless AWS EC2 deployment. |
+
+---
+
+## 📂 Elite Directory Structure
+
+```bash
+├── backend/                  # Core API System
+│   ├── apps/
+│   │   ├── accounts/         # Identity, Auth, & Session Management
+│   │   ├── blog/             # Core Domain logic (Posts)
+│   │   └── interactions/     # Likes, Comments, Notifications, Idempotency
+│   ├── config/               # Settings, Middleware, WSGI/ASGI, Routing
+│   ├── Dockerfile            # Python/Gunicorn Container definition
+│   └── requirements.txt      
+├── frontend/                 # React UI System
+│   ├── src/
+│   │   ├── api.js            # Axios Interceptors & Network layer
+│   │   ├── components/       # Reusable UI fragments (Buttons, Forms, Cards)
+│   │   ├── context/          # Global State (Auth, Toast Notifications)
+│   │   └── pages/            # View-level component aggregates
+│   ├── Dockerfile            # Multi-stage Node + Nginx build
+│   └── nginx.conf            # Reverse Proxy configuration
+├── docker-compose.yml        # Local Development Stack
+└── docker-compose.prod.yml   # AWS / Production Stack
+```
+
+---
+
+## 🚀 AWS EC2 Production Deployment
+
+We use a fully containerized approach for production, allowing you to deploy the entire stack to an AWS EC2 instance with a single command.
+
+### 1. Server Provisioning
+Spin up an Ubuntu 24.04 EC2 instance. Ensure Security Groups allow inbound traffic on **Port 80 (HTTP)**, **Port 443 (HTTPS)**, and **Port 22 (SSH)**.
+
+### 2. Environment Configuration
+Create your production environment file (`backend/.env.prod`):
+```env
+SECRET_KEY=your_highly_secure_random_string
+DEBUG=False
+ALLOWED_HOSTS=your-domain.com,51.21.201.106
+REDIS_URL=redis://redis:6379/0
+```
+*Note: The frontend automatically routes via Nginx, so `VITE_API_URL` should remain blank or unset to allow relative `/api/` routing.*
+
+### 3. Build & Launch
+```bash
+sudo docker compose -f docker-compose.prod.yml up -d --build
+```
+This single command spins up the Nginx Frontend, the Gunicorn Django API, the Redis message broker, and the Celery workers.
+
+---
+
+## ⚡ Local Development Setup
+
+Want to contribute or test locally?
+
+1. **Clone & Spin up the Dev Stack:**
    ```bash
    git clone <repository-url>
    cd django-login-register
-   ```
-
-2. **Setup Environment Variables**:
-   Create a `.env` file in `backend/` (see [Configuration](#-configuration)).
-
-3. **Build and Run**:
-   ```bash
    docker-compose up --build
    ```
-   - Frontend: `http://localhost:5173`
-   - Backend: `http://localhost:8000`
-   - API Docs: `http://localhost:8000/api/schema/swagger-ui/`
-
-### Option 2: Manual Installation
-
-#### Backend
-1. Navigate to backend:
-   ```bash
-   cd backend
-   ```
-2. Create virtual environment & install deps:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-3. Run migrations & start server:
-   ```bash
-   python manage.py migrate
-   python manage.py runserver
-   ```
-
-#### Frontend
-1. Navigate to frontend:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start development server:
-   ```bash
-   npm run dev
-   ```
+2. **Access the Application:**
+   - **Frontend:** `http://localhost:5173`
+   - **Backend API:** `http://localhost:8000`
+   - **Interactive API Docs:** `http://localhost:8000/api/schema/swagger-ui/`
 
 ---
 
-## ⚙ Configuration
+## 🧪 Testing & CI/CD
 
-### Backend `.env`
-Create `backend/.env` with the following keys (adjust as needed):
+We enforce strict quality control via GitHub Actions.
 
-```env
-DEBUG=True
-SECRET_KEY=your-secret-key
-ALLOWED_HOSTS=localhost,127.0.0.1
-# Database (if using Postgres manually)
-DB_NAME=blog_db
-DB_USER=blog_user
-DB_PASSWORD=password
-DB_HOST=localhost
-DB_PORT=5432
-```
+- **Backend Tests:** Extensive unit testing covering session lifecycle, token invalidation, and core logic.
+  ```bash
+  cd backend && python manage.py test
+  ```
+- **Continuous Integration:** Every push to `main` triggers automated linting, test suites, and Docker build verifications to ensure the main branch is always deployable.
 
 ---
 
-## 🔗 API Endpoints
-
-### Authentication (`/api/`)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/register/` | Register a new user |
-| POST | `/token/` | Obtain Access & Refresh tokens (Login) |
-| POST | `/token/refresh/` | Refresh Access token |
-| GET/PUT | `/profile/` | Get or Update user profile |
-| POST | `/change-password/` | Change current user password |
-| GET | `/sessions/` | List active sessions |
-| POST | `/logout/` | Logout from current device |
-| POST | `/logout-all/` | Logout from all devices |
-
-### Blog (`/api/blog/`)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/posts/` | List all posts |
-| POST | `/posts/` | Create a new post |
-| GET | `/posts/{id}/` | Retrieve a specific post |
-| PUT | `/posts/{id}/` | Update a post |
-| DELETE | `/posts/{id}/` | Delete a post |
-
----
-
-## 🧪 Testing
-
-### Backend Tests
-Run the standard Django test suite:
-```bash
-cd backend
-python manage.py test
-```
-
-### Frontend Linting
-Check code quality:
-```bash
-cd frontend
-npm run lint
-```
-
----
-
-
-## 🤝 Contributing
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
-
----
-
-## 📜 Community & Security
-
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Contributing Guidelines](CONTRIBUTING.md)
-- [Security Policy](SECURITY.md)
+<div align="center">
+  <i>Engineered for stability, designed for scale.</i><br>
+  <b>Built with ❤️ by Ashif Ek</b>
+</div>
