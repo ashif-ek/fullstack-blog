@@ -22,12 +22,12 @@ jobs:
           echo "DB_HOST=db" >> backend/.env
           echo "DB_PORT=5432" >> backend/.env
           echo "SECRET_KEY=test-secret-key" >> backend/.env
-          docker-compose build backend
+          docker-compose build api
 
       - name: Run migrations
         run: |
           sleep 10
-          docker-compose run backend python manage.py migrate
+          docker-compose run api python manage.py migrate
 
       - name: Run backend tests
-        run: docker-compose run backend python manage.py test
+        run: docker-compose run api python manage.py test
