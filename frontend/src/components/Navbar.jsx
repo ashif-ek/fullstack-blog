@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
 import Cookies from "js-cookie"
 import { useState, useEffect } from "react"
-import api from "../api"
+import { profileService } from "../api"
 import NotificationBell from "./interactions/NotificationBell"
 
 function Navbar() {
@@ -13,7 +13,7 @@ function Navbar() {
 
     const fetchProfilePic = async () => {
         try {
-            const res = await api.get("/api/profile/");
+            const res = await profileService.getProfile();
             if (res.data.image) {
                 setProfilePic(res.data.image);
             }

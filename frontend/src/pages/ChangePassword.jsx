@@ -1,5 +1,5 @@
 import { useState } from "react";
-import api from "../api";
+import { authService } from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useToast } from "../context/ToastContext";
@@ -22,7 +22,7 @@ function ChangePassword() {
 
         setLoading(true);
         try {
-            await api.put("/api/change-password/", {
+            await authService.changePassword({
                 old_password: oldPassword,
                 new_password: newPassword
             });

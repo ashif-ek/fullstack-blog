@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import api from "../api";
+import { profileService } from "../api";
 import Layout from "../components/Layout";
 import { useToast } from "../context/ToastContext";
 
@@ -20,7 +20,7 @@ function Profile() {
 
     const getProfile = async () => {
         try {
-            const res = await api.get("/api/profile/");
+            const res = await profileService.getProfile();
             setProfile(res.data);
             setEmail(res.data.email);
             setLoading(false);
@@ -52,9 +52,7 @@ function Profile() {
 
         try {
             // Using PATCH for partial update
-            const res = await api.patch("/api/profile/", formData, {
-                headers: { "Content-Type": "multipart/form-data" }
-            });
+            const res = await profileService.updateProfile(formData);
             setProfile(res.data); // Update state with response (which includes new image URL)
             setPreview(null);
             setImage(null);

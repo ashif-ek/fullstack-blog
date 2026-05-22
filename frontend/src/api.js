@@ -95,4 +95,46 @@ api.interceptors.response.use(
     }
 );
 
+// Centralized API Services
+export const authService = {
+    login: (email, password) => api.post("/api/login/", { email, password }),
+    register: (email, password) => api.post("/api/register/", { email, password }),
+    changePassword: (data) => api.put("/api/change-password/", data),
+    refreshToken: (refresh) => api.post("/api/token/refresh/", { refresh }),
+};
+
+export const profileService = {
+    getProfile: () => api.get("/api/profile/"),
+    updateProfile: (formData) => api.patch("/api/profile/", formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+    }),
+};
+
+export const blogService = {
+    getPosts: (query = "") => {
+        const url = query ? `/api/blog/posts/search/?q=${encodeURIComponent(query)}` : "/api/blog/posts/";
+        return api.get(url);
+    },
+    getPostDetail: (id) => api.get(`/api/blog/posts/${id}/`),
+    createPost: (formData) => api.post("/api/blog/posts/", formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+    }),
+    deletePost: (id) => api.delete(`/api/blog/posts/${id}/`),
+};
+
+export const interactionService = {
+    getNotifications: () => api.get("/api/interactions/notifications/"),
+    markNotificationAsRead: (id) => api.post(`/api/interactions/notifications/${id}/mark_as_read/`),
+    getPostComments: (postId) => api.get(`/api/interactions/comments/post_comments/?post_id=${postId}`),
+    createComment: (data) => api.post("/api/interactions/comments/", data),
+    getPostLikeStatus: (postId) => api.get(`/api/interactions/posts/${postId}/like/`),
+    toggleLikePost: (postId, idempotencyKey) => api.post(`/api/interactions/posts/${postId}/like/`, {}, {
+        headers: { 'Idempotency-Key': idempotencyKey }
+    }),
+    sharePost: (postId, shared_to, idempotencyKey) => api.post(`/api/interactions/posts/${postId}/share/`, { shared_to }, {
+        headers: { 'Idempotency-Key': idempotencyKey }
+    }),
+};
+
 export default api;
+

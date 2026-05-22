@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../api";
+import { blogService } from "../api";
 import PostCard from "../components/PostCard";
 import Layout from "../components/Layout";
 import { useToast } from "../context/ToastContext";
@@ -17,8 +17,7 @@ function Home() {
     const { addToast } = useToast();
 
     const getPosts = (query = "") => {
-        const url = query ? `/api/blog/posts/search/?q=${encodeURIComponent(query)}` : "/api/blog/posts/";
-        api.get(url)
+        blogService.getPosts(query)
             .then((res) => res.data)
             .then((data) => {
                 // DRF Paginated Response puts arrays in data.results
@@ -37,7 +36,7 @@ function Home() {
 
     const deletePost = (id) => {
         if (window.confirm("Are you sure you want to delete this citation?")) {
-            api.delete(`/api/blog/posts/${id}/`)
+            blogService.deletePost(id)
                 .then((res) => {
                     if (res.status === 204) {
                         addToast("Citation deleted successfully.", "info");
@@ -67,11 +66,7 @@ function Home() {
             formData.append("image", image);
         }
 
-        api.post("/api/blog/posts/", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
+        blogService.createPost(formData)
             .then((res) => {
                 if (res.status === 201) {
                     addToast("Research published successfully!", "success");

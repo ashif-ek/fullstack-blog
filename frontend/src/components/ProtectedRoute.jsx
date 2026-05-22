@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
-import api from "../api";
+import { authService } from "../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 import { useState, useEffect } from "react";
 
@@ -27,9 +27,7 @@ function ProtectedRoute({ children }) {
             return;
         }
         try {
-            const res = await api.post("/api/token/refresh/", {
-                refresh: refresh,
-            });
+            const res = await authService.refreshToken(refresh);
             if (res.status === 200) {
                 Cookies.set(ACCESS_TOKEN, res.data.access);
                 setIsAuthorized(true);

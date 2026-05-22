@@ -1,6 +1,8 @@
 name: Backend CD
 
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -25,3 +27,24 @@ jobs:
           docker build -t blog-backend backend
           docker tag blog-backend:latest ${{ secrets.ECR_REPO_URL }}:latest
           docker push ${{ secrets.ECR_REPO_URL }}:latest
+
+      - name: Deploy to AWS EC2 via SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_PROJECT_PATH: ${{ secrets.EC2_PROJECT_PATH }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST "
+            cd $EC2_PROJECT_PATH && \
+            aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO_URL }} && \
+            docker compose -f docker-compose.prod.yml pull api worker beat && \
+            docker compose -f docker-compose.prod.yml up -d api worker beat && \
+            docker compose -f docker-compose.prod.yml exec -T api python manage.py migrate --noinput && \
+            docker image prune -f
+          "
+

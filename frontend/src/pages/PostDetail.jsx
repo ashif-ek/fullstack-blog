@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import api from "../api";
+import { blogService } from "../api";
 import Layout from "../components/Layout";
 import { useToast } from "../context/ToastContext";
 import InteractionButtons from "../components/interactions/InteractionButtons";
@@ -20,7 +20,7 @@ function PostDetail() {
 
     const getPost = async () => {
         try {
-            const res = await api.get(`/api/blog/posts/${id}/`);
+            const res = await blogService.getPostDetail(id);
             setPost(res.data);
         } catch {
             addToast("Citation not found or access denied.", "error");

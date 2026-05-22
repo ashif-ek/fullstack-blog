@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import api from "../../api";
+import { interactionService } from "../../api";
 import { v4 as uuidv4 } from 'uuid';
 import debounce from 'lodash/debounce';
 
@@ -12,7 +12,7 @@ const InteractionButtons = ({ post, onCommentClick }) => {
 
     const fetchLikeStatus = useCallback(async () => {
         try {
-            const res = await api.get(`/api/interactions/posts/${post.id}/like/`);
+            const res = await interactionService.getPostLikeStatus(post.id);
             setLikes(res.data);
         } catch (err) {
             console.error("Failed to fetch like status", err);
@@ -30,11 +30,7 @@ const InteractionButtons = ({ post, onCommentClick }) => {
         debounce(async (postId, currentIsLiked, originalState) => {
             const idempotencyKey = uuidv4();
             try {
-                const res = await api.post(
-                    `/api/interactions/posts/${postId}/like/`, 
-                    {}, 
-                    { headers: { 'Idempotency-Key': idempotencyKey } }
-                );
+                const res = await interactionService.toggleLikePost(postId, idempotencyKey);
                 setLikes(res.data);
             } catch (err) {
                 console.error("Like action failed", err);
@@ -61,11 +57,7 @@ const InteractionButtons = ({ post, onCommentClick }) => {
     const handleShare = async () => {
         const idempotencyKey = uuidv4();
         try {
-            await api.post(
-                `/api/interactions/posts/${post.id}/share/`, 
-                { shared_to: "web_share" },
-                { headers: { 'Idempotency-Key': idempotencyKey } }
-            );
+            await interactionService.sharePost(post.id, "web_share", idempotencyKey);
             alert("Post shared successfully!");
         } catch (err) {
             console.error("Share failed", err);

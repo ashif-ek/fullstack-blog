@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import api from "../../api";
+import { interactionService } from "../../api";
 import { Link } from "react-router-dom";
 
 const NotificationBell = () => {
@@ -10,7 +10,7 @@ const NotificationBell = () => {
 
     const fetchNotifications = async () => {
         try {
-            const res = await api.get("/api/interactions/notifications/");
+            const res = await interactionService.getNotifications();
             setNotifications(res.data.results || res.data); // Handle both paginated and non-paginated
             setUnreadCount((res.data.results || res.data).filter(n => !n.is_read).length);
         } catch (err) {
@@ -37,7 +37,7 @@ const NotificationBell = () => {
 
     const markAsRead = async (id) => {
         try {
-            await api.post(`/api/interactions/notifications/${id}/mark_as_read/`);
+            await interactionService.markNotificationAsRead(id);
             fetchNotifications();
         } catch (err) {
             console.error("Failed to mark as read", err);

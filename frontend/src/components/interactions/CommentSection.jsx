@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from "../../api";
+import { interactionService } from "../../api";
 
 const CommentItem = ({ comment, onReplyAdded, postId }) => {
     const [showReplyForm, setShowReplyForm] = useState(false);
@@ -8,7 +8,7 @@ const CommentItem = ({ comment, onReplyAdded, postId }) => {
     const handleReply = async (e) => {
         e.preventDefault();
         try {
-            const res = await api.post("/api/interactions/comments/", {
+            const res = await interactionService.createComment({
                 post: postId,
                 parent: comment.id,
                 content: replyContent,
@@ -76,7 +76,7 @@ const CommentSection = ({ postId }) => {
 
     const fetchComments = async () => {
         try {
-            const res = await api.get(`/api/interactions/comments/post_comments/?post_id=${postId}`);
+            const res = await interactionService.getPostComments(postId);
             setComments(res.data);
         } catch (err) {
             console.error("Failed to fetch comments", err);
@@ -92,7 +92,7 @@ const CommentSection = ({ postId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await api.post("/api/interactions/comments/", {
+            const res = await interactionService.createComment({
                 post: postId,
                 content: newComment,
             });
