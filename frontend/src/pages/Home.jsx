@@ -85,7 +85,7 @@ function Home() {
     return (
         <Layout>
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b-2 border-slate-900 pb-6 gap-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b-2 border-red-700 pb-6 gap-4">
                 <div>
                     <h1 className="text-4xl font-serif font-bold text-slate-900 tracking-tight">Research Feed</h1>
                     <p className="text-slate-500 mt-2 font-sans text-sm uppercase tracking-wide">Recent Publications & Findings</p>
@@ -97,7 +97,7 @@ function Home() {
                             placeholder="Search papers..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="bg-white border border-gray-300 w-full py-3 px-4 text-slate-900 text-sm focus:outline-none focus:border-slate-900 focus:ring-0 transition font-sans rounded-none"
+                            className="bg-white border border-gray-300 w-full py-3 px-4 text-slate-900 text-sm focus:outline-none focus:border-red-700 focus:ring-0 transition font-sans rounded-none"
                         />
                         <svg className="w-4 h-4 text-slate-400 absolute right-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -105,7 +105,7 @@ function Home() {
                     </div>
                     <button 
                         onClick={() => setIsCreating(!isCreating)}
-                        className="bg-slate-900 hover:bg-slate-700 text-white font-bold py-3 px-8 rounded-none shadow-sm transition duration-300 font-sans uppercase tracking-widest text-xs whitespace-nowrap"
+                        className="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-none shadow-sm transition duration-300 font-sans uppercase tracking-widest text-xs whitespace-nowrap"
                     >
                         {isCreating ? "Discard Draft" : "Submit Paper"}
                     </button>
@@ -127,7 +127,7 @@ function Home() {
                                 required
                                 onChange={(e) => setTitle(e.target.value)}
                                 value={title}
-                                className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-slate-900 focus:ring-0 transition font-serif text-xl placeholder-gray-400 rounded-none"
+                                className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-red-700 focus:ring-0 transition font-serif text-xl placeholder-gray-400 rounded-none"
                                 placeholder="Enter paper title..."
                             />
                         </div>
@@ -159,7 +159,7 @@ function Home() {
                                 required
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
-                                className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-relaxed focus:outline-none focus:border-slate-900 focus:ring-0 h-56 transition font-serif text-lg placeholder-gray-400 resize-none rounded-none"
+                                className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-relaxed focus:outline-none focus:border-red-700 focus:ring-0 h-56 transition font-serif text-lg placeholder-gray-400 resize-none rounded-none"
                                 placeholder="Summarize your findings..."
                             ></textarea>
                         </div>
@@ -167,7 +167,7 @@ function Home() {
                             <button 
                                 type="submit" 
                                 disabled={loading}
-                                className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-10 transition duration-300 font-sans uppercase tracking-widest text-xs rounded-none"
+                                className="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-10 transition duration-300 font-sans uppercase tracking-widest text-xs rounded-none"
                             >
                                 {loading ? "Publishing..." : "Publish Findings"}
                             </button>

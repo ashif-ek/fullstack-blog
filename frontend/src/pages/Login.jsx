@@ -37,34 +37,21 @@ function Login() {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row relative overflow-hidden bg-[#090d16] text-white">
-            {/* Background Animations */}
+        <div className="min-h-screen flex flex-col md:flex-row relative overflow-hidden bg-white text-zinc-900">
+            {/* Background Grid Overlay */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                {/* Radial Glowing Blobs */}
-                <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-900/20 blur-[130px] animate-pulse-slow"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-blue-900/15 blur-[130px] animate-pulse-slow" style={{ animationDelay: "-3s" }}></div>
-                
-                {/* Floating Orbs */}
-                <div className="absolute top-[25%] right-[15%] w-[280px] h-[280px] rounded-full bg-indigo-950/20 blur-[100px] animate-float-slow-reverse"></div>
-                <div className="absolute bottom-[25%] left-[10%] w-[320px] h-[320px] rounded-full bg-blue-950/25 blur-[100px] animate-float-slow"></div>
-                
-                {/* Scientific Grid Overlay */}
                 <div 
-                    className="absolute inset-0 opacity-15"
-                    style={{
-                        backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 0)",
-                        backgroundSize: "32px 32px"
-                    }}
+                    className="absolute inset-0 opacity-40 academic-grid-bg"
                 ></div>
             </div>
 
             {/* Left Panel: Scientific Brand Showcase (Visible only on md+) */}
-            <div className="hidden md:flex md:w-1/2 flex-col justify-between p-12 relative z-10 border-r border-slate-900/60 bg-slate-950/20 backdrop-blur-[2px]">
+            <div className="hidden md:flex md:w-1/2 flex-col justify-between p-12 relative z-10 border-r border-zinc-200 bg-zinc-50">
                 {/* Top Logo */}
                 <div>
                     <Link to="/" className="inline-block group">
-                        <span className="font-serif font-bold text-2xl tracking-tight text-white group-hover:text-indigo-400 transition-colors duration-300">
-                            Academic<span className="text-indigo-500">Blog</span>
+                        <span className="font-serif font-bold text-2xl tracking-tight text-zinc-900 group-hover:text-red-700 transition-colors duration-300">
+                            Academic<span className="text-red-700">Blog</span>
                         </span>
                     </Link>
                 </div>
@@ -72,27 +59,27 @@ function Login() {
                 {/* Main Scientific Visual / Testimonial Carousel */}
                 <div className="max-w-md my-auto space-y-10">
                     <div className="space-y-4">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-bold text-indigo-400 uppercase tracking-widest">
-                            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 border border-red-200 rounded-none text-xs font-bold text-red-700 uppercase tracking-widest">
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                             Researcher Gateway
                         </span>
-                        <h2 className="text-4xl font-serif font-bold tracking-tight text-white leading-tight">
+                        <h2 className="text-4xl font-serif font-bold tracking-tight text-zinc-900 leading-tight">
                             Elevating the peer review ecosystem.
                         </h2>
                     </div>
 
                     {/* Interactive Citation Testimonial */}
-                    <div className="relative p-6 rounded-2xl bg-slate-900/40 border border-slate-800/80 backdrop-blur-sm shadow-xl min-h-[160px] flex flex-col justify-between">
+                    <div className="relative p-6 rounded-none bg-white border border-zinc-200 border-l-4 border-l-red-700 shadow-sm min-h-[160px] flex flex-col justify-between">
                         <div className={`transition-all duration-500 transform ${fadeState} flex-grow`}>
-                            <p className="text-slate-300 italic font-serif leading-relaxed text-sm">
+                            <p className="text-zinc-700 italic font-serif leading-relaxed text-sm">
                                 "{QUOTES[activeQuote].text}"
                             </p>
                         </div>
-                        <div className={`mt-4 pt-4 border-t border-slate-800/80 transition-all duration-500 transform ${fadeState}`}>
-                            <p className="text-white font-sans text-xs font-bold uppercase tracking-wider">
+                        <div className={`mt-4 pt-4 border-t border-zinc-100 transition-all duration-500 transform ${fadeState}`}>
+                            <p className="text-zinc-900 font-sans text-xs font-bold uppercase tracking-wider">
                                 {QUOTES[activeQuote].author}
                             </p>
-                            <p className="text-slate-500 text-[11px] font-medium font-sans">
+                            <p className="text-zinc-500 text-[11px] font-medium font-sans">
                                 {QUOTES[activeQuote].role}
                             </p>
                         </div>
@@ -110,8 +97,8 @@ function Login() {
                                         setFadeState("opacity-100 translate-y-0");
                                     }, 400);
                                 }}
-                                className={`h-1.5 rounded-full transition-all duration-300 ${
-                                    idx === activeQuote ? "w-6 bg-indigo-500" : "w-1.5 bg-slate-700 hover:bg-slate-600"
+                                className={`h-1 transition-all duration-300 rounded-none ${
+                                    idx === activeQuote ? "w-6 bg-red-700" : "w-2 bg-zinc-300 hover:bg-zinc-400"
                                 }`}
                                 aria-label={`Go to slide ${idx + 1}`}
                             />
@@ -121,7 +108,7 @@ function Login() {
 
                 {/* Bottom Footer Credits */}
                 <div>
-                    <p className="text-slate-600 text-xs font-sans">
+                    <p className="text-zinc-500 text-xs font-sans">
                         &copy; 2026 AcademicBlog. Built for global open science.
                     </p>
                 </div>
@@ -132,8 +119,8 @@ function Login() {
                 {/* Mobile Header Logo */}
                 <div className="md:hidden mb-8 text-center">
                     <Link to="/" className="inline-block">
-                        <span className="font-serif font-bold text-3xl tracking-tight text-white">
-                            Academic<span className="text-indigo-500">Blog</span>
+                        <span className="font-serif font-bold text-3xl tracking-tight text-zinc-900">
+                            Academic<span className="text-red-700">Blog</span>
                         </span>
                     </Link>
                 </div>
@@ -142,10 +129,10 @@ function Login() {
                 <Form method="login" />
 
                 {/* Mobile Footer Links */}
-                <div className="md:hidden mt-8 text-slate-500 text-xs flex gap-4 font-sans justify-center">
-                    <Link to="/privacy" className="hover:text-indigo-400 transition-colors">Privacy</Link>
+                <div className="md:hidden mt-8 text-zinc-500 text-xs flex gap-4 font-sans justify-center">
+                    <Link to="/privacy" className="hover:text-red-700 transition-colors">Privacy</Link>
                     <span>&bull;</span>
-                    <Link to="/terms" className="hover:text-indigo-400 transition-colors">Terms</Link>
+                    <Link to="/terms" className="hover:text-red-700 transition-colors">Terms</Link>
                 </div>
             </div>
         </div>

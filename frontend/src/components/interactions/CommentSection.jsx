@@ -22,7 +22,7 @@ const CommentItem = ({ comment, onReplyAdded, postId }) => {
     };
 
     return (
-        <div className="mb-6 pl-4 border-l-2 border-gray-100">
+        <div className="mb-6 pl-4 border-l-2 border-zinc-200">
             <div className="flex items-center space-x-2 mb-2">
                 <span className="font-bold text-sm text-slate-900">{comment.author.email}</span>
                 <span className="text-xs text-slate-400 font-sans">
@@ -33,7 +33,7 @@ const CommentItem = ({ comment, onReplyAdded, postId }) => {
             
             <button 
                 onClick={() => setShowReplyForm(!showReplyForm)}
-                className="text-xs font-bold text-blue-800 uppercase tracking-widest hover:text-blue-600 transition duration-300"
+                className="text-xs font-bold text-red-700 uppercase tracking-widest hover:text-red-800 transition duration-300"
             >
                 {showReplyForm ? "Cancel Reply" : "Reply"}
             </button>
@@ -41,7 +41,7 @@ const CommentItem = ({ comment, onReplyAdded, postId }) => {
             {showReplyForm && (
                 <form onSubmit={handleReply} className="mt-4">
                     <textarea
-                        className="w-full p-3 border border-gray-200 focus:border-blue-500 rounded-lg outline-none transition duration-300"
+                        className="w-full p-3 border border-zinc-200 focus:border-red-700 rounded-none outline-none transition duration-300 bg-white"
                         rows="2"
                         placeholder="Write a reply..."
                         value={replyContent}
@@ -50,7 +50,7 @@ const CommentItem = ({ comment, onReplyAdded, postId }) => {
                     />
                     <button 
                         type="submit"
-                        className="mt-2 bg-blue-900 text-white px-4 py-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-blue-800 transition duration-300"
+                        className="mt-2 bg-red-700 text-white px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-none hover:bg-red-800 transition duration-300"
                     >
                         Post Reply
                     </button>
@@ -107,15 +107,15 @@ const CommentSection = ({ postId }) => {
     if (loading) return <div className="p-4 text-center">Loading comments...</div>;
 
     return (
-        <section className="bg-slate-50 p-6 sm:p-10 rounded-xl my-10">
-            <h3 className="text-xl font-serif font-bold text-slate-900 mb-8 border-b-2 border-blue-900 inline-block pb-1">
+        <section className="bg-zinc-50 p-6 sm:p-10 rounded-none border border-zinc-200 my-10">
+            <h3 className="text-xl font-serif font-bold text-slate-900 mb-8 border-b-2 border-red-700 inline-block pb-1">
                 Discussion
             </h3>
 
             {/* Comment Input */}
             <form onSubmit={handleSubmit} className="mb-10">
                 <textarea
-                    className="w-full p-4 border border-gray-200 focus:border-blue-500 rounded-lg outline-none transition duration-300"
+                    className="w-full p-4 border border-zinc-200 focus:border-red-700 rounded-none outline-none transition duration-300 bg-white"
                     rows="3"
                     placeholder="Share your insights..."
                     value={newComment}
@@ -124,7 +124,7 @@ const CommentSection = ({ postId }) => {
                 />
                 <button 
                     type="submit"
-                    className="mt-4 bg-slate-900 text-white px-6 py-3 font-bold uppercase text-xs tracking-widest rounded hover:bg-blue-900 transition duration-300"
+                    className="mt-4 bg-red-700 text-white px-6 py-3 font-bold uppercase text-xs tracking-widest rounded-none hover:bg-red-800 transition duration-300"
                 >
                     Post Comment
                 </button>

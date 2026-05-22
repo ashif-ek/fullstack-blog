@@ -69,11 +69,11 @@ function Profile() {
 
     return (
         <Layout>
-            <div className="bg-white border border-gray-200 p-10 shadow-sm max-w-3xl mx-auto">
-                <div className="flex flex-col md:flex-row items-center gap-8 mb-4 border-b-2 border-slate-900 pb-8">
+            <div className="bg-white border border-zinc-200 p-10 shadow-sm max-w-3xl mx-auto">
+                <div className="flex flex-col md:flex-row items-center gap-8 mb-4 border-b-2 border-red-700 pb-8">
                      {/* Photo Section */}
                     <div className="relative group">
-                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100 flex items-center justify-center">
+                        <div className="w-32 h-32 rounded-none overflow-hidden border border-zinc-200 bg-zinc-50 flex items-center justify-center">
                              {preview ? (
                                 <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                              ) : profile.image ? (
@@ -84,7 +84,7 @@ function Profile() {
                                 </div>
                              )}
                         </div>
-                        <label htmlFor="profile-upload" className="absolute bottom-0 right-0 bg-slate-900 text-white p-2 rounded-full cursor-pointer hover:bg-slate-700 transition shadow-md">
+                        <label htmlFor="profile-upload" className="absolute bottom-0 right-0 bg-red-700 text-white p-2 rounded-none cursor-pointer hover:bg-red-800 transition shadow-md">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
@@ -107,7 +107,7 @@ function Profile() {
                                 type="text"
                                 value={email}
                                 disabled
-                                className="w-full bg-gray-100 border border-gray-300 px-4 py-3 text-slate-500 font-mono text-sm rounded-none"
+                                className="w-full bg-zinc-50 border border-zinc-200 px-4 py-3 text-slate-500 font-mono text-sm rounded-none"
                             />
                         </div>
 
@@ -117,7 +117,7 @@ function Profile() {
                                 type="text"
                                 value={profile.full_name}
                                 onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
-                                className="w-full bg-white border border-gray-300 px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-900 transition font-serif rounded-none placeholder-gray-400"
+                                className="w-full bg-white border border-gray-300 px-4 py-3 text-slate-900 focus:outline-none focus:border-red-700 transition font-serif rounded-none placeholder-gray-400"
                                 placeholder="Dr. Jane Doe"
                             />
                         </div>
@@ -129,7 +129,7 @@ function Profile() {
                             type="text"
                             value={profile.institution}
                             onChange={(e) => setProfile({ ...profile, institution: e.target.value })}
-                            className="w-full bg-white border border-gray-300 px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-900 transition font-serif rounded-none placeholder-gray-400"
+                            className="w-full bg-white border border-gray-300 px-4 py-3 text-slate-900 focus:outline-none focus:border-red-700 transition font-serif rounded-none placeholder-gray-400"
                             placeholder="Department of Computer Science..."
                         />
                     </div>
@@ -139,7 +139,7 @@ function Profile() {
                         <textarea
                             value={profile.bio}
                             onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-                            className="w-full bg-white border border-gray-300 px-4 py-3 h-40 text-slate-900 focus:outline-none focus:border-blue-900 transition font-serif rounded-none placeholder-gray-400 resize-none leading-relaxed"
+                            className="w-full bg-white border border-gray-300 px-4 py-3 h-40 text-slate-900 focus:outline-none focus:border-red-700 transition font-serif rounded-none placeholder-gray-400 resize-none leading-relaxed"
                             placeholder="Detail your primary research focus..."
                         ></textarea>
                     </div>
@@ -148,7 +148,7 @@ function Profile() {
                         <button
                             type="submit"
                             disabled={saving}
-                            className="bg-slate-900 hover:bg-slate-700 text-white font-sans font-bold py-3 px-8 uppercase tracking-widest text-xs rounded-none transition duration-300 shadow-sm"
+                            className="bg-red-700 hover:bg-red-800 text-white font-sans font-bold py-3 px-8 uppercase tracking-widest text-xs rounded-none transition duration-300 shadow-sm"
                         >
                             {saving ? "Updating..." : "Update Credentials"}
                         </button>
@@ -162,7 +162,7 @@ function Profile() {
                         </div>
                         <Link 
                             to="/change-password" 
-                            className="border-2 border-slate-100 hover:border-slate-900 text-slate-700 hover:text-slate-900 font-sans font-bold py-3 px-6 uppercase tracking-widest text-xs rounded-none transition duration-300"
+                            className="border-2 border-zinc-200 hover:border-red-700 text-zinc-700 hover:text-red-700 font-sans font-bold py-3 px-6 uppercase tracking-widest text-xs rounded-none transition duration-300"
                         >
                             Change Password
                         </Link>

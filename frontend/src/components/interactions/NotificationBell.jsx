@@ -48,7 +48,7 @@ const NotificationBell = () => {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative p-2 text-slate-600 hover:text-blue-900 transition duration-300 focus:outline-none"
+                className="relative p-2 text-slate-600 hover:text-red-700 transition duration-300 focus:outline-none"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ const NotificationBell = () => {
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-80 bg-white border border-zinc-200 shadow-xl rounded-none overflow-hidden z-50">
                     <div className="p-4 border-b border-gray-100 flex justify-between items-center">
                         <h4 className="text-sm font-bold text-slate-900 uppercase tracking-widest">Notifications</h4>
                         <span className="text-[10px] text-slate-400 font-bold uppercase">{unreadCount} New</span>
@@ -83,7 +83,7 @@ const NotificationBell = () => {
                                 <div
                                     key={n.id}
                                     className={`p-4 border-b border-gray-50 hover:bg-slate-50 transition duration-200 cursor-pointer ${
-                                        !n.is_read ? "bg-blue-50/30" : ""
+                                        !n.is_read ? "bg-red-50/30" : ""
                                     }`}
                                     onClick={() => markAsRead(n.id)}
                                 >
@@ -97,7 +97,7 @@ const NotificationBell = () => {
                                             </p>
                                         </div>
                                         {!n.is_read && (
-                                            <div className="w-2 h-2 bg-blue-600 rounded-full mt-1"></div>
+                                            <div className="w-2 h-2 bg-red-700 rounded-full mt-1"></div>
                                         )}
                                     </div>
                                 </div>

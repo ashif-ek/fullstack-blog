@@ -30,10 +30,10 @@ function Form({ method }) {
     const hasPasswordInput = password.length > 0;
 
     const getStrengthColor = () => {
-        if (strengthScore <= 1) return "bg-rose-500 shadow-rose-500/50";
-        if (strengthScore === 2) return "bg-amber-500 shadow-amber-500/50";
-        if (strengthScore === 3) return "bg-indigo-500 shadow-indigo-500/50";
-        return "bg-emerald-500 shadow-emerald-500/50";
+        if (strengthScore <= 1) return "bg-red-600";
+        if (strengthScore === 2) return "bg-amber-500";
+        if (strengthScore === 3) return "bg-emerald-500";
+        return "bg-emerald-700";
     };
 
     const getStrengthText = () => {
@@ -86,12 +86,12 @@ function Form({ method }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="auth-glass-card p-8 md:p-10 w-full max-w-md rounded-2xl transition-all duration-300">
+        <form onSubmit={handleSubmit} className="auth-academic-card p-8 md:p-10 w-full max-w-md rounded-none transition-all duration-300">
             <div className="mb-8 text-center">
-                <h1 className="text-3xl font-serif font-bold text-white tracking-tight uppercase mb-2">
+                <h1 className="text-3xl font-serif font-bold text-zinc-900 tracking-tight uppercase mb-2">
                     {name}
                 </h1>
-                <p className="text-slate-400 text-xs font-sans tracking-wider uppercase">
+                <p className="text-zinc-500 text-xs font-sans tracking-wider uppercase">
                     {method === "login" 
                         ? "Enter your academic credentials" 
                         : "Apply for research portal access"}
@@ -100,13 +100,13 @@ function Form({ method }) {
 
             {/* Email Field */}
             <div className="mb-6 relative">
-                <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-200 ${isFocusedEmail ? "text-indigo-400" : "text-slate-500"}`}>
+                <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-200 ${isFocusedEmail ? "text-red-700" : "text-zinc-400"}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                     </svg>
                 </div>
                 <input
-                    className="w-full bg-slate-900/40 border border-slate-700/60 pl-12 pr-4 py-3.5 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 transition-all rounded-xl placeholder-transparent text-sm peer floating-label-input"
+                    className="w-full bg-white border border-zinc-300 pl-12 pr-4 py-3.5 text-zinc-900 focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700/20 transition-all rounded-none placeholder-transparent text-sm peer floating-label-input"
                     type="email"
                     id="auth-email"
                     value={email}
@@ -118,7 +118,7 @@ function Form({ method }) {
                 />
                 <label 
                     htmlFor="auth-email"
-                    className="absolute left-12 top-1/2 -translate-y-1/2 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 font-sans pointer-events-none transition-all duration-200 origin-left"
+                    className="absolute left-12 top-1/2 -translate-y-1/2 text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2 font-sans pointer-events-none transition-all duration-200 origin-left"
                 >
                     Email Address
                 </label>
@@ -126,13 +126,13 @@ function Form({ method }) {
 
             {/* Password Field */}
             <div className="mb-6 relative">
-                <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-200 ${isFocusedPassword ? "text-indigo-400" : "text-slate-500"}`}>
+                <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-200 ${isFocusedPassword ? "text-red-700" : "text-zinc-400"}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                     </svg>
                 </div>
                 <input
-                    className="w-full bg-slate-900/40 border border-slate-700/60 pl-12 pr-12 py-3.5 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 transition-all rounded-xl placeholder-transparent text-sm peer floating-label-input"
+                    className="w-full bg-white border border-zinc-300 pl-12 pr-12 py-3.5 text-zinc-900 focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700/20 transition-all rounded-none placeholder-transparent text-sm peer floating-label-input"
                     type={showPassword ? "text" : "password"}
                     id="auth-password"
                     value={password}
@@ -144,14 +144,14 @@ function Form({ method }) {
                 />
                 <label 
                     htmlFor="auth-password"
-                    className="absolute left-12 top-1/2 -translate-y-1/2 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 font-sans pointer-events-none transition-all duration-200 origin-left"
+                    className="absolute left-12 top-1/2 -translate-y-1/2 text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2 font-sans pointer-events-none transition-all duration-200 origin-left"
                 >
                     Password
                 </label>
                 <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors focus:outline-none p-1"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 transition-colors focus:outline-none p-1"
                 >
                     {showPassword ? (
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -168,47 +168,47 @@ function Form({ method }) {
 
             {/* Password Strength Checklist (Register Mode) */}
             {method === "register" && hasPasswordInput && (
-                <div className="mb-6 p-4 bg-slate-900/50 border border-slate-800 rounded-xl animate-fade-in-down">
+                <div className="mb-6 p-4 bg-zinc-50 border border-zinc-200 rounded-none animate-fade-in-down">
                     <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs text-slate-400 font-sans font-semibold uppercase tracking-wider">Password Strength</span>
+                        <span className="text-xs text-zinc-500 font-sans font-semibold uppercase tracking-wider">Password Strength</span>
                         <span className={`text-xs font-bold font-sans uppercase ${
-                            strengthScore <= 1 ? "text-rose-400" :
-                            strengthScore === 2 ? "text-amber-400" :
-                            strengthScore === 3 ? "text-indigo-400" : "text-emerald-400"
+                            strengthScore <= 1 ? "text-red-700" :
+                            strengthScore === 2 ? "text-amber-600" :
+                            strengthScore === 3 ? "text-emerald-600" : "text-emerald-700"
                         }`}>{getStrengthText()}</span>
                     </div>
                     {/* Progress Bar */}
-                    <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden mb-3">
+                    <div className="h-1.5 w-full bg-zinc-200 rounded-none overflow-hidden mb-3">
                         <div 
                             className={`h-full transition-all duration-300 ${getStrengthColor()}`}
                             style={{ width: `${(strengthScore / 4) * 100}%` }}
                         ></div>
                     </div>
                     {/* Requirements checklist */}
-                    <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 text-slate-400">
+                    <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 text-zinc-500">
                         <div className="flex items-center gap-1.5 text-[11px]">
-                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.length ? "text-emerald-500" : "text-slate-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.length ? "text-emerald-600" : "text-zinc-300"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
-                            <span className={passwordCriteria.length ? "text-slate-200" : "text-slate-500"}>8+ characters</span>
+                            <span className={passwordCriteria.length ? "text-zinc-700" : "text-zinc-400"}>8+ characters</span>
                         </div>
                         <div className="flex items-center gap-1.5 text-[11px]">
-                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.hasUppercase ? "text-emerald-500" : "text-slate-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.hasUppercase ? "text-emerald-600" : "text-zinc-300"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
-                            <span className={passwordCriteria.hasUppercase ? "text-slate-200" : "text-slate-500"}>1 Uppercase</span>
+                            <span className={passwordCriteria.hasUppercase ? "text-zinc-700" : "text-zinc-400"}>1 Uppercase</span>
                         </div>
                         <div className="flex items-center gap-1.5 text-[11px]">
-                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.hasNumber ? "text-emerald-500" : "text-slate-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.hasNumber ? "text-emerald-600" : "text-zinc-300"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
-                            <span className={passwordCriteria.hasNumber ? "text-slate-200" : "text-slate-500"}>1 Number</span>
+                            <span className={passwordCriteria.hasNumber ? "text-zinc-700" : "text-zinc-400"}>1 Number</span>
                         </div>
                         <div className="flex items-center gap-1.5 text-[11px]">
-                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.hasSpecial ? "text-emerald-500" : "text-slate-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                            <svg className={`w-3.5 h-3.5 transition-colors ${passwordCriteria.hasSpecial ? "text-emerald-600" : "text-zinc-300"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
-                            <span className={passwordCriteria.hasSpecial ? "text-slate-200" : "text-slate-500"}>1 Special Char</span>
+                            <span className={passwordCriteria.hasSpecial ? "text-zinc-700" : "text-zinc-400"}>1 Special Char</span>
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@ function Form({ method }) {
 
             {/* Submit Button */}
             <button 
-                className="w-full relative overflow-hidden bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold py-3.5 px-4 rounded-xl transition duration-300 font-sans uppercase tracking-widest text-xs shadow-lg shadow-indigo-600/20 active:scale-[0.98] disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full relative overflow-hidden bg-red-700 hover:bg-red-800 text-white font-bold py-3.5 px-4 rounded-none transition duration-300 font-sans uppercase tracking-widest text-xs active:scale-[0.98] disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer shadow-sm"
                 type="submit"
                 disabled={loading}
             >
@@ -232,22 +232,22 @@ function Form({ method }) {
             </button>
 
             {/* Redirect Section */}
-            <p className="mt-6 text-center text-slate-400 text-sm">
+            <p className="mt-6 text-center text-zinc-600 text-sm">
                 {method === "login" ? (
                     <>
-                        New Researcher? <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-bold ml-1 transition border-b border-indigo-400/40 hover:border-indigo-300">Apply for Access</Link>
+                        New Researcher? <Link to="/register" className="text-red-700 hover:text-red-800 font-bold ml-1 transition border-b border-red-700/30 hover:border-red-800">Apply for Access</Link>
                     </>
                 ) : (
                     <>
-                        Already have credentials? <Link to="/login" className="text-indigo-400 hover:text-indigo-300 font-bold ml-1 transition border-b border-indigo-400/40 hover:border-indigo-300">Log In</Link>
+                        Already have credentials? <Link to="/login" className="text-red-700 hover:text-red-800 font-bold ml-1 transition border-b border-red-700/30 hover:border-red-800">Log In</Link>
                     </>
                 )}
             </p>
 
             {/* Administrative Access (Login Page Only) */}
             {method === "login" && (
-                <div className="mt-8 pt-6 border-t border-slate-800/80 text-center">
-                    <a href="http://127.0.0.1:8000/admin/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-full text-xs font-sans text-slate-400 hover:text-indigo-400 transition-all uppercase tracking-wider">
+                <div className="mt-8 pt-6 border-t border-zinc-200 text-center">
+                    <a href="http://127.0.0.1:8000/admin/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 hover:border-zinc-300 rounded-none text-xs font-sans text-zinc-600 hover:text-red-700 transition-all uppercase tracking-wider">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                         </svg>

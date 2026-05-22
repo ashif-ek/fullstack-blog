@@ -38,7 +38,7 @@ export const ToastProvider = ({ children }) => {
                             min-w-[300px] p-4 border border-x-[6px] shadow-lg cursor-pointer transform transition-all duration-300 animate-slide-in-right bg-white
                             ${toast.type === 'success' ? 'border-l-green-600 border-y-gray-200 border-r-gray-200' : ''}
                             ${toast.type === 'error' ? 'border-l-red-600 border-y-gray-200 border-r-gray-200' : ''}
-                            ${toast.type === 'info' ? 'border-l-blue-600 border-y-gray-200 border-r-gray-200' : ''}
+                            ${toast.type === 'info' ? 'border-l-zinc-900 border-y-gray-200 border-r-gray-200' : ''}
                         `}
                     >
                         <div className="flex items-center justify-between">
@@ -46,7 +46,7 @@ export const ToastProvider = ({ children }) => {
                                 <h4 className={`font-bold text-xs uppercase tracking-widest mb-1 
                                      ${toast.type === 'success' ? 'text-green-700' : ''}
                                      ${toast.type === 'error' ? 'text-red-700' : ''}
-                                     ${toast.type === 'info' ? 'text-blue-700' : ''}
+                                     ${toast.type === 'info' ? 'text-zinc-900' : ''}
                                 `}>
                                     {toast.type}
                                 </h4>

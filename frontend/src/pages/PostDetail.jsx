@@ -50,7 +50,7 @@ function PostDetail() {
                 )}
 
                 <div className="p-12 md:p-16">
-                    <div className="uppercase tracking-widest text-xs font-bold text-blue-900 mb-4 font-sans border-b-2 border-slate-900 inline-block pb-1">Research Publication</div>
+                    <div className="uppercase tracking-widest text-xs font-bold text-red-700 mb-4 font-sans border-b-2 border-red-700 inline-block pb-1">Research Publication</div>
                     <h1 className="text-4xl md:text-5xl font-bold font-serif text-slate-900 leading-tight mb-6">{post.title}</h1>
                     
                     <div className="flex items-center text-slate-500 text-sm font-sans mb-12 border-b border-gray-200 pb-8">
@@ -75,7 +75,7 @@ function PostDetail() {
                     </div>
 
                     <div className="mt-16 pt-8 border-t border-gray-200 flex justify-between items-center">
-                        <Link to="/" className="text-slate-500 hover:text-blue-900 font-bold text-xs uppercase tracking-widest transition duration-300 flex items-center gap-2">
+                        <Link to="/" className="text-slate-500 hover:text-red-700 font-bold text-xs uppercase tracking-widest transition duration-300 flex items-center gap-2">
                              <span className="transform -translate-x-1 group-hover:-translate-x-2 transition-transform">←</span> Return to Feed
                         </Link>
                     </div>

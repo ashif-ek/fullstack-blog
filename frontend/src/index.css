@@ -9,8 +9,8 @@ body {
   font-family: var(--font-sans);
   background-color: #ffffff;
   /* White */
-  color: #0f172a;
-  /* Slate-900 */
+  color: #18181b;
+  /* zinc-900 */
 }
 
 h1,
@@ -20,59 +20,33 @@ h4,
 h5,
 h6 {
   font-family: var(--font-serif);
-  color: #0f172a;
-  /* Slate-900 */
+  color: #18181b;
+  /* zinc-900 */
 }
 
-/* Custom Auth Page Animations */
-@keyframes float {
-  0% { transform: translateY(0px) scale(1) rotate(0deg); }
-  50% { transform: translateY(-25px) scale(1.05) rotate(180deg); }
-  100% { transform: translateY(0px) scale(1) rotate(360deg); }
+/* Academic Grid Overlay */
+.academic-grid-bg {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1.5px, transparent 0);
+  background-size: 32px 32px;
 }
 
-@keyframes float-reverse {
-  0% { transform: translateY(0px) scale(1.05) rotate(360deg); }
-  50% { transform: translateY(20px) scale(0.95) rotate(180deg); }
-  100% { transform: translateY(0px) scale(1.05) rotate(0deg); }
+/* Auth Page Academic Card Styling */
+.auth-academic-card {
+  background: #ffffff;
+  border: 1px solid #e4e4e7; /* zinc-200 */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 }
 
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; filter: blur(80px); }
-  50% { opacity: 0.6; filter: blur(100px); }
+.auth-academic-card:hover {
+  border-color: #b80000; /* crimson */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
 }
 
-.animate-float-slow {
-  animation: float 25s ease-in-out infinite;
-}
-
-.animate-float-slow-reverse {
-  animation: float-reverse 30s ease-in-out infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 10s ease-in-out infinite;
-}
-
-/* Glassmorphism custom styling */
-.auth-glass-card {
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.auth-glass-card:hover {
-  border-color: rgba(99, 102, 241, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.08), 0 0 40px 0 rgba(0, 0, 0, 0.4);
-}
-
-/* Floating labels transition behavior */
+/* Floating labels transition behavior for light theme */
 .floating-label-input:focus ~ label,
 .floating-label-input:not(:placeholder-shown) ~ label {
   transform: translateY(-1.5rem) scale(0.85);
-  color: #818cf8; /* indigo-400 */
+  color: #b80000; /* crimson */
 }
 
 .floating-label-input {

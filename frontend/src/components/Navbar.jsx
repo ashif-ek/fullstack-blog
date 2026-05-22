@@ -43,8 +43,8 @@ function Navbar() {
                 <div className="flex justify-between items-center h-16">
                     {/* Logo / Brand */}
                     <Link to="/" className="flex items-center py-4 px-2 group">
-                        <span className="font-serif font-bold text-slate-900 text-xl tracking-tight group-hover:text-blue-900 transition duration-300">
-                            Academic<span className="text-blue-700">Blog</span>
+                        <span className="font-serif font-bold text-slate-900 text-xl tracking-tight group-hover:text-red-700 transition duration-300">
+                            Academic<span className="text-red-700">Blog</span>
                         </span>
                     </Link>
 
@@ -65,10 +65,10 @@ function Navbar() {
                     <div className="hidden md:flex items-center space-x-6">
                         {isLoggedIn ? (
                             <>
-                                <Link to="/" className="text-slate-600 hover:text-blue-900 font-sans uppercase tracking-widest text-xs font-bold transition">Research Feed</Link>
-                                <Link to="/profile" className="flex items-center text-slate-600 hover:text-blue-900 font-sans uppercase tracking-widest text-xs font-bold transition">
+                                <Link to="/" className="text-slate-600 hover:text-red-700 font-sans uppercase tracking-widest text-xs font-bold transition">Research Feed</Link>
+                                <Link to="/profile" className="flex items-center text-slate-600 hover:text-red-700 font-sans uppercase tracking-widest text-xs font-bold transition">
                                     {profilePic && (
-                                        <img src={profilePic} alt="Me" className="w-6 h-6 rounded-full object-cover mr-2 border border-gray-300" />
+                                        <img src={profilePic} alt="Me" className="w-6 h-6 rounded-none object-cover mr-2 border border-gray-300" />
                                     )}
                                     Profile
                                 </Link>
@@ -77,8 +77,8 @@ function Navbar() {
                             </>
                         ) : (
                             <>
-                                <Link to="/login" className="text-slate-600 hover:text-blue-900 font-sans uppercase tracking-widest text-xs font-bold transition">Log In</Link>
-                                <Link to="/register" className="px-5 py-2 text-white bg-slate-900 hover:bg-slate-700 rounded-none font-sans uppercase tracking-widest text-xs font-bold transition shadow-sm">Sign Up</Link>
+                                <Link to="/login" className="text-slate-600 hover:text-red-700 font-sans uppercase tracking-widest text-xs font-bold transition">Log In</Link>
+                                <Link to="/register" className="px-5 py-2 text-white bg-red-700 hover:bg-red-800 rounded-none font-sans uppercase tracking-widest text-xs font-bold transition shadow-sm">Sign Up</Link>
                             </>
                         )}
                     </div>
@@ -93,14 +93,14 @@ function Navbar() {
                             <>
                                 <div className="flex items-center py-4 border-b border-gray-100 mb-2">
                                      {profilePic ? (
-                                        <img src={profilePic} alt="Me" className="w-10 h-10 rounded-full object-cover mr-3 border border-gray-300" />
+                                        <img src={profilePic} alt="Me" className="w-10 h-10 rounded-none object-cover mr-3 border border-gray-300" />
                                     ) : (
-                                        <div className="w-10 h-10 rounded-full bg-slate-200 mr-3 flex items-center justify-center font-serif font-bold text-slate-500">U</div>
+                                        <div className="w-10 h-10 rounded-none bg-slate-200 mr-3 flex items-center justify-center font-serif font-bold text-slate-500">U</div>
                                     )}
-                                    <div className="flex flex-col">
+                                     <div className="flex flex-col">
                                          <span className="text-sm font-bold text-slate-900">Signed In</span>
-                                         <Link to="/profile" className="text-xs text-blue-700 font-sans font-bold uppercase tracking-widest mt-1" onClick={() => setIsMenuOpen(false)}>Manage Profile</Link>
-                                    </div>
+                                         <Link to="/profile" className="text-xs text-red-700 font-sans font-bold uppercase tracking-widest mt-1" onClick={() => setIsMenuOpen(false)}>Manage Profile</Link>
+                                     </div>
                                 </div>
 
                                 <Link to="/" className="block px-2 py-3 text-slate-700 hover:bg-slate-50 font-sans uppercase tracking-widest text-xs font-bold rounded" onClick={() => setIsMenuOpen(false)}>Research Feed</Link>

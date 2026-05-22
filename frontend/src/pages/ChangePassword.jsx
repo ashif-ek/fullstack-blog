@@ -41,7 +41,7 @@ function ChangePassword() {
 
     return (
         <Layout>
-            <div className="max-w-md mx-auto bg-white border border-gray-200 p-10 shadow-sm animate-fade-in-down">
+            <div className="max-w-md mx-auto bg-white border border-zinc-200 rounded-none p-10 shadow-sm animate-fade-in-down">
                 <h2 className="text-3xl font-serif font-bold mb-6 text-slate-900 tracking-tight">Change Password</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-6">
@@ -50,7 +50,7 @@ function ChangePassword() {
                             type="password"
                             value={oldPassword}
                             onChange={(e) => setOldPassword(e.target.value)}
-                            className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-slate-900 focus:ring-0 transition font-sans rounded-none"
+                            className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-red-700 focus:ring-0 transition font-sans rounded-none"
                             required
                         />
                     </div>
@@ -60,7 +60,7 @@ function ChangePassword() {
                             type="password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
-                            className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-slate-900 focus:ring-0 transition font-sans rounded-none"
+                            className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-red-700 focus:ring-0 transition font-sans rounded-none"
                             required
                         />
                     </div>
@@ -70,19 +70,19 @@ function ChangePassword() {
                             type="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-slate-900 focus:ring-0 transition font-sans rounded-none"
+                            className="bg-white border border-gray-300 w-full py-4 px-5 text-slate-900 leading-tight focus:outline-none focus:border-red-700 focus:ring-0 transition font-sans rounded-none"
                             required
                         />
                     </div>
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 px-4 transition duration-300 font-sans uppercase tracking-widest text-xs rounded-none"
+                        className="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-4 transition duration-300 font-sans uppercase tracking-widest text-xs rounded-none"
                     >
                         {loading ? "Updating..." : "Update Password"}
                     </button>
                     <div className="mt-6 text-center">
-                         <Link to="/profile" className="text-slate-500 hover:text-slate-800 text-xs font-bold uppercase tracking-widest transition">
+                         <Link to="/profile" className="text-slate-500 hover:text-red-700 text-xs font-bold uppercase tracking-widest transition">
                             Cancel
                         </Link>
                     </div>
